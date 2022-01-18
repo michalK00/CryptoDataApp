@@ -22,7 +22,7 @@
                   <Image url="@img/searchIcon.png" />
                </image>
             </ImageView>
-            <TableView fx:id="table" layoutY="150.0" prefHeight="551.0" prefWidth="757.0" style="-fx-background-color: #F2E9D5;" stylesheets="@css/table-view-style.css">
+            <TableView fx:id="table" layoutY="150.0" onMouseClicked="#tableClicked" prefHeight="551.0" prefWidth="757.0" style="-fx-background-color: #F2E9D5;" stylesheets="@css/table-view-style.css">
               <columns>
                 <TableColumn fx:id="rankColumn" prefWidth="75.0" text="#" />
                 <TableColumn fx:id="nameColumn" prefWidth="301.0" styleClass="css/" text="Name" />

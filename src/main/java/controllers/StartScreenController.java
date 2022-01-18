@@ -2,20 +2,19 @@ package controllers;
 
 import com.example.cryptodataapp.Coin;
 import com.example.cryptodataapp.CoinData;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.jfoenix.controls.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.net.URL;
@@ -42,43 +41,15 @@ public class StartScreenController implements Initializable{
     @FXML
     private TableColumn<Coin, String> nameColumn;
     @FXML
-    private TableColumn<Coin, Float> priceColumn;
+    private TableColumn<Coin, Double> priceColumn;
     @FXML
-    private TableColumn<Coin, Float> changeColumn;
+    private TableColumn<Coin, Double> changeColumn;
     @FXML
     private TableColumn<Coin, Long> marketCapColumn;
 
     ObservableList<Coin> list = FXCollections.observableArrayList(
 
     );
-
-
-
-
-//    public void fillColumnsWithData(){
-//
-//        TableColumn<Coin, Integer> rankColumn = new TableColumn<>("#");
-//        rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
-//
-//        TableColumn<Coin, String> nameColumn = new TableColumn<>("Name");
-//        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//
-//        TableColumn<Coin, Float> priceColumn = new TableColumn<>("Price");
-//        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//
-//        TableColumn<Coin, String> changeColumn = new TableColumn<>("24h");
-//        changeColumn.setCellValueFactory(new PropertyValueFactory<>("priceChange24hPercentage"));
-//
-//        TableColumn<Coin, String> marketCapColumn = new TableColumn<>("Market Cap");
-//        marketCapColumn.setCellValueFactory(new PropertyValueFactory<>("marketCap"));
-//
-//
-//
-//
-//    }
-
-
-
 
     @FXML
     protected void cryptoDashboardButtonClicked() {
@@ -95,18 +66,45 @@ public class StartScreenController implements Initializable{
     protected void refreshButtonClicked() {
 
     }
+    @FXML
+    protected void tableClicked(){
+
+    }
     public void getAllCryptoListedOnTable(){
         ObservableList<Coin> coinList = FXCollections.observableArrayList();
         coinList.addAll(data.getListOfCoins());
 
         rankColumn.setCellValueFactory(new PropertyValueFactory<Coin,Integer>("rank"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Coin,String>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Coin,Float>("currentPrice"));
-        changeColumn.setCellValueFactory(new PropertyValueFactory<Coin,Float>("priceChange24hPercentage"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("currentPrice"));
+        changeColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("priceChange24hPercentage"));
         marketCapColumn.setCellValueFactory(new PropertyValueFactory<Coin,Long>("marketCap"));
+        //rankColumn.setStyle("-fx-background-color:  #384D52; -fx-text-fill:  #F2E9D5");
 
+
+        table.setRowFactory(tableView -> {
+            final TableRow<Coin> row = new TableRow<>();
+            row.hoverProperty().addListener((observable) -> {
+                final Coin coin = row.getItem();
+                if (row.isHover() && coin != null) {
+
+                    //row.setStyle("-fx-background-color:  #384D52");
+                    row.setStyle("-fx-text-fill:  #F2E9D5");
+
+                } else{
+                    //row.setStyle("-fx-background-color:  #ffffff; -fx-text-fill:  #384D52");
+
+                    row.setStyle("-fx-text-fill:  #384D52");
+                }
+            });
+
+            return row;
+        });
         table.setItems(coinList);
     }
+
+
+
 
 
     @Override

@@ -42,10 +42,10 @@ public class CoinData {
             String symbol = album.getString("symbol");
             String name = album.getString("name");
             String imageFileSourcePath =  album.getString("image");
-            float currentPrice = album.getFloat("current_price");
+            double currentPrice = album.getDouble("current_price");
             long marketCap = album.getLong("market_cap");
-            float priceChange24h = album.getFloat("price_change_24h");
-            float priceChange24hPercentage =  album.getFloat("price_change_percentage_24h");
+            double priceChange24h = Math.round(album.getFloat("price_change_24h")*100.0)/100.0;
+            double priceChange24hPercentage =  Math.round(album.getFloat("price_change_percentage_24h")*100.0)/100.0;
             long circulatingSupply = album.getLong("circulating_supply");
             float ath = album.getFloat("ath");
             float athChangePercentage = album.getFloat("ath_change_percentage");
