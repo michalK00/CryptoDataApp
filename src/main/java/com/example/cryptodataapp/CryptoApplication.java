@@ -18,6 +18,7 @@ public class CryptoApplication extends Application {
         stage.setTitle("Crypto Data Application");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

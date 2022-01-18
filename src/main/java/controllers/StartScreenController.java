@@ -55,16 +55,20 @@ public class StartScreenController implements Initializable{
     protected void cryptoDashboardButtonClicked() {
         portfolioDashboard.setVisible(false);
         cryptoDashboard.setVisible(true);
+        portfolioButton.setButtonType(JFXButton.ButtonType.RAISED);
+        cryptoDashboardButton.setButtonType(JFXButton.ButtonType.FLAT);
     }
     @FXML
     protected void portfolioButtonClicked() {
         cryptoDashboard.setVisible(false);
         portfolioDashboard.setVisible(true);
+        portfolioButton.setButtonType(JFXButton.ButtonType.FLAT);
+        cryptoDashboardButton.setButtonType(JFXButton.ButtonType.RAISED);
 
     }
     @FXML
     protected void refreshButtonClicked() {
-
+        getAllCryptoListedOnTable();
     }
     @FXML
     protected void tableClicked(){
@@ -87,14 +91,9 @@ public class StartScreenController implements Initializable{
             row.hoverProperty().addListener((observable) -> {
                 final Coin coin = row.getItem();
                 if (row.isHover() && coin != null) {
-
-                    //row.setStyle("-fx-background-color:  #384D52");
-                    row.setStyle("-fx-text-fill:  #F2E9D5");
-
+                    row.setStyle("-fx-background-color:  #D1C9B8");
                 } else{
-                    //row.setStyle("-fx-background-color:  #ffffff; -fx-text-fill:  #384D52");
-
-                    row.setStyle("-fx-text-fill:  #384D52");
+                    row.setStyle("-fx-background-color:  #FFFFFF");
                 }
             });
 
@@ -110,5 +109,17 @@ public class StartScreenController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getAllCryptoListedOnTable();
+
+        // Starting postion (that may change) for all components
+        cryptoDashboardButton.setButtonType(JFXButton.ButtonType.FLAT);
+//        rankColumn.setStyle("-fx-background-color:  #F2E9D5");
+//        nameColumn.setStyle("-fx-background-color:  #F2E9D5");
+//        priceColumn.setStyle("-fx-background-color:  #F2E9D5");
+//        changeColumn.setStyle("-fx-background-color:  #F2E9D5");
+//        marketCapColumn.setStyle("-fx-background-color:  #F2E9D5");
+        //
+
+
+
     }
 }

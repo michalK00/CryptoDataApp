@@ -22,13 +22,13 @@
                   <Image url="@img/searchIcon.png" />
                </image>
             </ImageView>
-            <TableView fx:id="table" layoutY="150.0" onMouseClicked="#tableClicked" prefHeight="551.0" prefWidth="757.0" style="-fx-background-color: #F2E9D5;" stylesheets="@css/table-view-style.css">
+            <TableView fx:id="table" layoutY="150.0" onMouseClicked="#tableClicked" prefHeight="551.0" prefWidth="757.0" stylesheets="@css/table-view-style.css">
               <columns>
-                <TableColumn fx:id="rankColumn" prefWidth="75.0" text="#" />
-                <TableColumn fx:id="nameColumn" prefWidth="301.0" styleClass="css/" text="Name" />
-                  <TableColumn fx:id="priceColumn" prefWidth="142.0" text="Price" />
-                  <TableColumn fx:id="changeColumn" prefWidth="76.0" text="24h(%)" />
-                  <TableColumn fx:id="marketCapColumn" prefWidth="162.0" text="Market Cap" />
+                <TableColumn fx:id="rankColumn" prefWidth="75.0" style="-fx-text-fill:#435C61" text="#" />
+                <TableColumn fx:id="nameColumn" prefWidth="301.0" style="-fx-text-fill:#435C61" styleClass="css/" text="Name" />
+                  <TableColumn fx:id="priceColumn" prefWidth="142.0" style="-fx-text-fill:#435C61" text="Price (USD)" />
+                  <TableColumn fx:id="changeColumn" prefWidth="76.0" style="-fx-text-fill:#435C61" text="24h(%)" />
+                  <TableColumn fx:id="marketCapColumn" prefWidth="162.0" style="-fx-text-fill:#435C61" text="Market Cap (USD)" />
               </columns>
             </TableView>
             <JFXButton fx:id="refreshButton" buttonType="RAISED" layoutX="118.0" layoutY="95.0" onAction="#refreshButtonClicked" prefHeight="34.0" prefWidth="61.0" style="-fx-background-color: #435C61;" text="Refresh" textFill="#f2e9d5" />
