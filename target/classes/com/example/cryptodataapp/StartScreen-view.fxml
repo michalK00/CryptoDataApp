@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
+   <children>
+      <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="670.0" layoutY="93.0" prefHeight="34.0" prefWidth="61.0" ripplerFill="#74a0a8" style="-fx-background-color: #435C61;" text="Search" textFill="#f2e9d5" />
+            <TextField layoutX="514.0" layoutY="97.0" promptText="Search" />
+            <ImageView id="searchImg" fitHeight="25.0" fitWidth="23.0" layoutX="490.0" layoutY="96.0">
+               <image>
+                  <Image url="@img/searchIcon.png" />
+               </image>
+            </ImageView>
+            <TableView layoutY="150.0" prefHeight="551.0" prefWidth="757.0" style="-fx-background-color: #F2E9D5;">
+              <columns>
+                <TableColumn prefWidth="75.0" text="#" />
+                <TableColumn prefWidth="301.0" text="Name" />
+                  <TableColumn prefWidth="142.0" text="Price" />
+                  <TableColumn prefWidth="76.0" text="24h" />
+                  <TableColumn prefWidth="162.0" text="Market Cap" />
+              </columns>
+            </TableView>
+            <JFXButton fx:id="refreshButton" buttonType="RAISED" layoutX="116.0" layoutY="95.0" onAction="#refreshButtonClicked" prefHeight="34.0" prefWidth="61.0" style="-fx-background-color: #435C61;" text="Refresh" textFill="#f2e9d5" />
+            <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="83.0" layoutY="98.0">
+               <image>
+                  <Image url="@img/refresh.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <VBox prefHeight="700.0" prefWidth="244.0" style="-fx-background-color: #435C61;">
+         <children>
+            <AnchorPane prefHeight="681.0" prefWidth="244.0">
+               <children>
+                  <Text fill="#f2e9d5" layoutX="11.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cryptocurrency Data Application" textAlignment="CENTER" wrappingWidth="222.23046875">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <AnchorPane layoutX="22.0" layoutY="261.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="cryptoDashboardButton" buttonType="RAISED" layoutX="56.0" layoutY="30.0" onAction="#cryptoDashboardButtonClicked" prefHeight="47.0" prefWidth="139.0" style="-fx-background-color: #384D52;" text="Crypto Dashboard" textFill="#f2e9d5">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="portfolioButton" buttonType="RAISED" layoutX="56.0" layoutY="113.0" onAction="#portfolioButtonClicked" prefHeight="47.0" prefWidth="139.0" style="-fx-background-color: #384D52;" text="Portfolio" textFill="#f2e9d5">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView id="dashboardImg" fitHeight="47.0" fitWidth="50.0" layoutY="30.0">
+                           <image>
+                              <Image url="@img/chartIcon.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView id="walletImg" fitHeight="47.0" fitWidth="50.0" layoutY="113.0">
+                           <image>
+                              <Image url="@img/walletIcon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <ImageView fx:id="btcImg" fitHeight="163.0" fitWidth="170.0" layoutX="37.0" layoutY="30.0">
+                     <image>
+                        <Image backgroundLoading="true" url="@img/btcIcon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Text fill="#f2e9d5" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by CoinGecko" textAlignment="RIGHT" wrappingWidth="236.853515625" />
+         </children>
+      </VBox>
+      <AnchorPane fx:id="portfolioDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="false">
+         <children>
+            <Text layoutX="292.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In Construction">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
