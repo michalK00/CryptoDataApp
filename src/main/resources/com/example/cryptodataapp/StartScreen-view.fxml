@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
+<AnchorPane maxHeight="100" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
    <children>
       <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0">
          <children>
@@ -25,7 +25,7 @@
             <TableView fx:id="table" layoutY="150.0" onMouseClicked="#tableClicked" prefHeight="551.0" prefWidth="757.0" stylesheets="@css/table-view-style.css">
               <columns>
                 <TableColumn fx:id="rankColumn" prefWidth="75.0" style="-fx-text-fill:#435C61" text="#" />
-                <TableColumn fx:id="nameColumn" prefWidth="301.0" style="-fx-text-fill:#435C61" styleClass="css/" text="Name" />
+                <TableColumn fx:id="nameColumn" prefWidth="301.0" style="-fx-text-fill:#435C61" text="Name" />
                   <TableColumn fx:id="priceColumn" prefWidth="142.0" style="-fx-text-fill:#435C61" text="Price (USD)" />
                   <TableColumn fx:id="changeColumn" prefWidth="76.0" style="-fx-text-fill:#435C61" text="24h(%)" />
                   <TableColumn fx:id="marketCapColumn" prefWidth="162.0" style="-fx-text-fill:#435C61" text="Market Cap (USD)" />

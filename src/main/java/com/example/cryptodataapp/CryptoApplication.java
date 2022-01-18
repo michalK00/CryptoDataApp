@@ -17,7 +17,9 @@ public class CryptoApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
         stage.setTitle("Crypto Data Application");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
+
 
     }
 

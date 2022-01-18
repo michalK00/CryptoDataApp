@@ -85,6 +85,17 @@ public class StartScreenController implements Initializable{
         marketCapColumn.setCellValueFactory(new PropertyValueFactory<Coin,Long>("marketCap"));
         //rankColumn.setStyle("-fx-background-color:  #384D52; -fx-text-fill:  #F2E9D5");
 
+//        table.setRowFactory(tableView -> {
+//            final TableCell<Coin, Double> cell = new TableCell<>();
+//            final double priceChange24hPercentage = cell.getItem();
+//            if (priceChange24hPercentage>=0) {
+//                cell.setStyle("-fx-text-fill:  GREEN");
+//            } else{
+//                cell.setStyle("-fx-text-fill:  RED");
+//            }
+//
+//                    return null;
+//                });
 
         table.setRowFactory(tableView -> {
             final TableRow<Coin> row = new TableRow<>();
@@ -93,7 +104,7 @@ public class StartScreenController implements Initializable{
                 if (row.isHover() && coin != null) {
                     row.setStyle("-fx-background-color:  #D1C9B8");
                 } else{
-                    row.setStyle("-fx-background-color:  #FFFFFF");
+                    row.setStyle("");
                 }
             });
 
