@@ -1,0 +1,6 @@
+.table-view .content{
+    -fx-background-color: black;
+}
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+}

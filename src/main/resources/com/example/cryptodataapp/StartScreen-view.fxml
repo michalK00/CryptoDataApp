@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
    <children>
       <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0">
          <children>
@@ -23,16 +22,16 @@
                   <Image url="@img/searchIcon.png" />
                </image>
             </ImageView>
-            <TableView layoutY="150.0" prefHeight="551.0" prefWidth="757.0" style="-fx-background-color: #F2E9D5;">
+            <TableView fx:id="table" layoutY="150.0" prefHeight="551.0" prefWidth="757.0" style="-fx-background-color: #F2E9D5;" stylesheets="@css/table-view-style.css">
               <columns>
-                <TableColumn prefWidth="75.0" text="#" />
-                <TableColumn prefWidth="301.0" text="Name" />
-                  <TableColumn prefWidth="142.0" text="Price" />
-                  <TableColumn prefWidth="76.0" text="24h" />
-                  <TableColumn prefWidth="162.0" text="Market Cap" />
+                <TableColumn fx:id="rankColumn" prefWidth="75.0" text="#" />
+                <TableColumn fx:id="nameColumn" prefWidth="301.0" styleClass="css/" text="Name" />
+                  <TableColumn fx:id="priceColumn" prefWidth="142.0" text="Price" />
+                  <TableColumn fx:id="changeColumn" prefWidth="76.0" text="24h(%)" />
+                  <TableColumn fx:id="marketCapColumn" prefWidth="162.0" text="Market Cap" />
               </columns>
             </TableView>
-            <JFXButton fx:id="refreshButton" buttonType="RAISED" layoutX="116.0" layoutY="95.0" onAction="#refreshButtonClicked" prefHeight="34.0" prefWidth="61.0" style="-fx-background-color: #435C61;" text="Refresh" textFill="#f2e9d5" />
+            <JFXButton fx:id="refreshButton" buttonType="RAISED" layoutX="118.0" layoutY="95.0" onAction="#refreshButtonClicked" prefHeight="34.0" prefWidth="61.0" style="-fx-background-color: #435C61;" text="Refresh" textFill="#f2e9d5" />
             <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="83.0" layoutY="98.0">
                <image>
                   <Image url="@img/refresh.png" />
