@@ -69,6 +69,13 @@
             <version>20211205</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.jai-imageio</groupId>
+            <artifactId>jai-imageio-core</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -92,9 +99,9 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.example.cryptodataapp/com.example.cryptodataapp.HelloApplication</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <launcher>cryptodataapp</launcher>
+                            <jlinkZipName>cryptodataapp</jlinkZipName>
+                            <jlinkImageName>cryptodataapp</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>

@@ -1,34 +1,44 @@
-package com.example.cryptodataapp;
+package cryptodataapp;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URI;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.text.DecimalFormat;
+import java.nio.channels.UnresolvedAddressException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class CoinData {
 
+    private static HttpURLConnection connection;
     private static ArrayList<Coin> listOfCoins = new ArrayList<Coin>();
 
-    public CoinData(){
+    public CoinData() throws UnknownHostException {
         connectAndLoadData();
     }
 
     public void connectAndLoadData(){
 
+    try{
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&sparkline=false&price_change_percentage=24h")).build();
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenAccept(CoinData::parse)
                 .join();
+    } catch (RuntimeException e){
+        e.printStackTrace();
+    }
+
+
+
+
+
     }
     public static void parse(String responseBody){
 
@@ -56,7 +66,7 @@ public class CoinData {
 
     }
 
-    public ArrayList<Coin> getListOfCoins() {
+    public ArrayList<Coin> getListOfCoins() throws UnresolvedAddressException {
         return listOfCoins;
     }
 

@@ -10,8 +10,8 @@ module com.example.cryptodataapp {
     requires org.json;
     requires com.jfoenix;
 
-    opens com.example.cryptodataapp to javafx.fxml;
-    exports com.example.cryptodataapp;
+    opens cryptodataapp to javafx.fxml;
+    exports cryptodataapp;
     exports controllers;
     opens controllers to javafx.fxml;
 }

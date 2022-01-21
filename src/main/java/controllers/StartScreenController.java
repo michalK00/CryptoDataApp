@@ -1,23 +1,30 @@
 package controllers;
 
-import com.example.cryptodataapp.Coin;
-import com.example.cryptodataapp.CoinData;
-import javafx.beans.property.SimpleObjectProperty;
+import cryptodataapp.Coin;
+import cryptodataapp.CoinData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import com.jfoenix.controls.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import com.jfoenix.controls.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import org.controlsfx.control.PropertySheet;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.net.UnknownHostException;
+import java.nio.channels.UnresolvedAddressException;
 import java.util.ResourceBundle;
 
 public class StartScreenController implements Initializable{
@@ -51,6 +58,9 @@ public class StartScreenController implements Initializable{
 
     );
 
+    public StartScreenController() throws UnknownHostException {
+    }
+
     @FXML
     protected void cryptoDashboardButtonClicked() {
         portfolioDashboard.setVisible(false);
@@ -72,31 +82,68 @@ public class StartScreenController implements Initializable{
     }
     @FXML
     protected void tableClicked(){
+        //funkcja anonimowa
+        table.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                if(event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() !=  null){
+                    System.out.println();
+
+                    System.out.println(rankColumn.getCellData(table.getSelectionModel().getSelectedItem()));
+                }
+                //w momencie klikniecia na nazwe tabeli pokazuje się null;
+            }
+        });
+    }
+
+
+    public void noInterentConnection(){
+
+        Label l = new Label("No internet connection");
+        l.setFont(new Font("Calibri", 26));
+        l.setTextFill(Color.web("#435C61"));
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        Image image = null;
+        try {
+            File file = new File(classLoader.getResource("noWifi.png").getFile());
+            InputStream inputStream = new FileInputStream(file);
+            image = new Image(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ImageView view = new ImageView(image);
+        view.setFitHeight(50);
+        view.setFitWidth(50);
+        view.setPreserveRatio(true);
+        l.setGraphic(view);
+
+        table.setPlaceholder(l);
 
     }
-    public void getAllCryptoListedOnTable(){
-        ObservableList<Coin> coinList = FXCollections.observableArrayList();
-        coinList.addAll(data.getListOfCoins());
+    public void setCellTextColorDependingOnTheirValue(){
+        //https://stackoverflow.com/questions/51988663/tableview-modify-style-per-cell-only
 
-        rankColumn.setCellValueFactory(new PropertyValueFactory<Coin,Integer>("rank"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Coin,String>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("currentPrice"));
-        changeColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("priceChange24hPercentage"));
-        marketCapColumn.setCellValueFactory(new PropertyValueFactory<Coin,Long>("marketCap"));
-        //rankColumn.setStyle("-fx-background-color:  #384D52; -fx-text-fill:  #F2E9D5");
+        changeColumn.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item,  empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    setText(item.toString());
+                    if (item < 0.0) {
+                        setTextFill(Color.RED); // or use setStyle(String)
+                    } else {
+                        setTextFill(Color.GREEN); // or use setStyle(String)
+                    }
+                }
+            }
+        });
 
-//        table.setRowFactory(tableView -> {
-//            final TableCell<Coin, Double> cell = new TableCell<>();
-//            final double priceChange24hPercentage = cell.getItem();
-//            if (priceChange24hPercentage>=0) {
-//                cell.setStyle("-fx-text-fill:  GREEN");
-//            } else{
-//                cell.setStyle("-fx-text-fill:  RED");
-//            }
-//
-//                    return null;
-//                });
-
+    }
+    public void rowHoveringFunction(){
+        https://stackoverflow.com/questions/26269940/how-do-i-make-something-happen-on-hover-of-a-row-in-a-javafx-tableview
         table.setRowFactory(tableView -> {
             final TableRow<Coin> row = new TableRow<>();
             row.hoverProperty().addListener((observable) -> {
@@ -110,12 +157,30 @@ public class StartScreenController implements Initializable{
 
             return row;
         });
-        table.setItems(coinList);
+
     }
 
+    public void getAllCryptoListedOnTable(){
+
+        ObservableList<Coin> coinList = FXCollections.observableArrayList();
+
+        if(!data.getListOfCoins().isEmpty()){
+            coinList.addAll(data.getListOfCoins());
+            rankColumn.setCellValueFactory(new PropertyValueFactory<Coin,Integer>("rank"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<Coin,String>("name"));
+            priceColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("currentPrice"));
+            changeColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("priceChange24hPercentage"));
+            marketCapColumn.setCellValueFactory(new PropertyValueFactory<Coin,Long>("marketCap"));
+
+            setCellTextColorDependingOnTheirValue();
+            rowHoveringFunction();
+            table.setItems(coinList);
+        } else{
+            noInterentConnection();
+        }
 
 
-
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -123,14 +188,7 @@ public class StartScreenController implements Initializable{
 
         // Starting postion (that may change) for all components
         cryptoDashboardButton.setButtonType(JFXButton.ButtonType.FLAT);
-//        rankColumn.setStyle("-fx-background-color:  #F2E9D5");
-//        nameColumn.setStyle("-fx-background-color:  #F2E9D5");
-//        priceColumn.setStyle("-fx-background-color:  #F2E9D5");
-//        changeColumn.setStyle("-fx-background-color:  #F2E9D5");
-//        marketCapColumn.setStyle("-fx-background-color:  #F2E9D5");
-        //
-
-
 
     }
+
 }

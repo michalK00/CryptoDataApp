@@ -1,4 +1,4 @@
-package com.example.cryptodataapp;
+package cryptodataapp;
 
 public class Coin {
 
