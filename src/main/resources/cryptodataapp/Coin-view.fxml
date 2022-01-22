@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoinViewController">
    <children>
+      <LineChart layoutX="77.0" layoutY="167.0" prefHeight="454.0" prefWidth="568.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
       <AnchorPane layoutX="-2.0" prefHeight="103.0" prefWidth="1006.0" style="-fx-background-color: #435C61;">
          <children>
             <JFXButton fx:id="goBackButton" layoutX="28.0" layoutY="28.0" onAction="#goBackButtonClicked" prefHeight="49.0" prefWidth="94.0" style="-fx-text-fill: #F2E9D5;" text="Back">
@@ -19,8 +32,33 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <Label fx:id="coinNameLabel" layoutX="269.0" layoutY="36.0" prefHeight="35.0" prefWidth="94.0" />
-            <ImageView fx:id="coinImage" fitHeight="62.0" fitWidth="66.0" layoutX="137.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="coinNameLabel" layoutX="273.0" layoutY="38.0" prefHeight="38.0" prefWidth="179.0" text="" textFill="#D1C9B8">
+               <font>
+                  <Font name="Calibri" size="28.0" />
+               </font></Label>
+            <ImageView fx:id="coinImage" fitHeight="62.0" fitWidth="66.0" layoutX="173.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="744.0" layoutY="41.0" text="Price: $" textFill="#d1c9b8">
+               <font>
+                  <Font name="Calibri" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="priceLabel" alignment="BOTTOM_LEFT" layoutX="829.0" layoutY="35.0" prefHeight="38.0" prefWidth="170.0" textFill="#d1c9b8">
+               <font>
+                  <Font name="Calibri" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="697.0" layoutY="103.0" prefHeight="597.0" prefWidth="307.0" style="-fx-background-color: #EDE8E0;">
+         <children>
+            <AnchorPane layoutY="47.0" prefHeight="26.0" prefWidth="307.0">
+               <children>
+                  <ProgressBar fx:id="dayHighLowProgressBar" layoutX="15.0" layoutY="4.0" prefHeight="11.0" prefWidth="277.0" progress="0.0" style="-fx-accent: #435C61;" />
+                  <Label alignment="CENTER" layoutX="124.0" layoutY="14.0" text="24H Range" />
+                  <Label fx:id="dayLowLabel" layoutX="14.0" layoutY="13.0" prefHeight="17.0" prefWidth="107.0" />
+                  <Label fx:id="dayHighLabel" alignment="CENTER_RIGHT" layoutX="208.0" layoutY="13.0" prefHeight="17.0" prefWidth="85.0" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

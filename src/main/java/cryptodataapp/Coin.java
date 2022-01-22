@@ -9,13 +9,15 @@ public class Coin {
     private String imageFileSourcePath;
     private double currentPrice;
     private long marketCap;
+    private double high24h;
+    private double low24h;
     private double priceChange24h;
     private double priceChange24hPercentage;
     private long circulatingSupply;
     private float ath;
     private float athChangePercentage;
 
-    public Coin(int rank, String id, String symbol, String name, String imageFileSourcePath, double currentPrice, long marketCap, double priceChange24h, double priceChange24hPercentage, long circulatingSupply, float ath, float athChangePercentage) {
+    public Coin(int rank, String id, String symbol, String name, String imageFileSourcePath, double currentPrice, long marketCap, double high24h, double low24h, double priceChange24h, double priceChange24hPercentage, long circulatingSupply, float ath, float athChangePercentage) {
         this.rank = rank;
         this.id = id;
         this.symbol = symbol;
@@ -23,6 +25,8 @@ public class Coin {
         this.imageFileSourcePath = imageFileSourcePath;
         this.currentPrice = currentPrice;
         this.marketCap = marketCap;
+        this.high24h = high24h;
+        this.low24h = low24h;
         this.priceChange24h = priceChange24h;
         this.priceChange24hPercentage = priceChange24hPercentage;
         this.circulatingSupply = circulatingSupply;
@@ -61,6 +65,14 @@ public class Coin {
 
     public long getMarketCap() {
         return marketCap;
+    }
+
+    public double getHigh24h() {
+        return high24h;
+    }
+
+    public double getLow24h() {
+        return low24h;
     }
 
     public double getPriceChange24h() {

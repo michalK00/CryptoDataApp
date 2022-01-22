@@ -57,10 +57,6 @@ public class StartScreenController implements Initializable{
     @FXML
     private TableColumn<Coin, Long> marketCapColumn;
 
-    ObservableList<Coin> list = FXCollections.observableArrayList(
-
-    );
-
     public StartScreenController()  {
     }
 
@@ -83,6 +79,8 @@ public class StartScreenController implements Initializable{
     protected void refreshButtonClicked() {
         getAllCryptoListedOnTable();
     }
+
+    public static int index;
     @FXML
     protected void tableClicked(){
         //funkcja anonimowa
@@ -92,6 +90,7 @@ public class StartScreenController implements Initializable{
                     System.out.println();
 
                     System.out.println(rankColumn.getCellData(table.getSelectionModel().getSelectedItem()));
+                    index = rankColumn.getCellData(table.getSelectionModel().getSelectedItem())-1;
                     try {
                         Stage stage = new Stage();
                         FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("Coin-view.fxml"));

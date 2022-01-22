@@ -15,14 +15,14 @@
    <children>
       <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="670.0" layoutY="93.0" prefHeight="34.0" prefWidth="61.0" ripplerFill="#74a0a8" style="-fx-background-color: #435C61;" text="Search" textFill="#f2e9d5" />
-            <TextField layoutX="514.0" layoutY="97.0" promptText="Search" />
-            <ImageView id="searchImg" fitHeight="25.0" fitWidth="23.0" layoutX="490.0" layoutY="96.0">
+            <JFXButton buttonType="RAISED" layoutX="670.0" layoutY="42.0" prefHeight="34.0" prefWidth="61.0" ripplerFill="#74a0a8" style="-fx-background-color: #435C61;" text="Search" textFill="#f2e9d5" />
+            <TextField layoutX="514.0" layoutY="46.0" promptText="Search" />
+            <ImageView id="searchImg" fitHeight="25.0" fitWidth="23.0" layoutX="490.0" layoutY="45.0">
                <image>
                   <Image url="@img/searchIcon.png" />
                </image>
             </ImageView>
-            <TableView fx:id="table" layoutY="150.0" onMouseClicked="#tableClicked" prefHeight="551.0" prefWidth="757.0" stylesheets="@css/table-view-style.css">
+            <TableView fx:id="table" layoutY="103.0" onMouseClicked="#tableClicked" prefHeight="598.0" prefWidth="757.0" stylesheets="@css/table-view-style.css">
               <columns>
                 <TableColumn fx:id="rankColumn" prefWidth="75.0" text="#" />
                 <TableColumn fx:id="nameColumn" prefWidth="301.0" text="Name" />
@@ -31,8 +31,8 @@
                   <TableColumn fx:id="marketCapColumn" prefWidth="162.0" text="Market Cap (USD)" />
               </columns>
             </TableView>
-            <JFXButton fx:id="refreshButton" buttonType="RAISED" layoutX="118.0" layoutY="95.0" onAction="#refreshButtonClicked" prefHeight="34.0" prefWidth="61.0" style="-fx-background-color: #435C61;" text="Refresh" textFill="#f2e9d5" />
-            <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="83.0" layoutY="98.0">
+            <JFXButton fx:id="refreshButton" buttonType="RAISED" layoutX="118.0" layoutY="44.0" onAction="#refreshButtonClicked" prefHeight="34.0" prefWidth="61.0" style="-fx-background-color: #435C61;" text="Refresh" textFill="#f2e9d5" />
+            <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="83.0" layoutY="47.0">
                <image>
                   <Image url="@img/refresh.png" />
                </image>

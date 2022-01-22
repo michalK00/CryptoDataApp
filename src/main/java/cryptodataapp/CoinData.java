@@ -50,13 +50,15 @@ public class CoinData {
             String imageFileSourcePath =  album.getString("image");
             double currentPrice = album.getDouble("current_price");
             long marketCap = album.getLong("market_cap");
+            double high24h = album.getFloat("high_24h");
+            double low24h = album.getFloat("low_24h");
             double priceChange24h = Math.round(album.getFloat("price_change_24h")*100.0)/100.0;
             double priceChange24hPercentage =  Math.round(album.getFloat("price_change_percentage_24h")*100.0)/100.0;
             long circulatingSupply = album.getLong("circulating_supply");
             float ath = album.getFloat("ath");
             float athChangePercentage = album.getFloat("ath_change_percentage");
             //System.out.println(id+" "+ symbol +" "+ currentPrice + " " + name + " " +imageFileSourcePath + marketCap + " "+priceChange24h+" "+ priceChange24hPercentage+" " + circulatingSupply + " " + ath + " "+ athChangePercentage);
-            filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage));
+            filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,high24h,low24h,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage));
         }
         listOfCoins=filledList;
 

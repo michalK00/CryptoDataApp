@@ -25,19 +25,34 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
-public class CoinViewController implements Initializable{
+public class CoinViewController implements  Initializable{
 
     CoinData data = new CoinData();
 
+
+    @FXML
+    private Label priceLabel;
+
     @FXML
     private ImageView coinImage;
+
     @FXML
     private Label coinNameLabel;
+
     @FXML
     private JFXButton goBackButton;
+
+    @FXML
+    private Label dayHighLabel;
+
+    @FXML
+    private ProgressBar dayHighLowProgressBar;
+
+    @FXML
+    private Label dayLowLabel;
+
 
     public CoinViewController() {
     }
@@ -62,22 +77,43 @@ public class CoinViewController implements Initializable{
 
 
 //    StartScreenController controller = new StartScreenController();
-//    public Coin getChosenCoinDataSet(){
-//        return data.getListOfCoins().get(controller.index);
-//    }
-//    public void setAllParametersBasedOnChosenCoin(){
-//        String img = getChosenCoinDataSet().getImageFileSourcePath();
-//        String name = getChosenCoinDataSet().getName();
-//        coinImage.setImage(new Image(img));
-//        coinNameLabel.setText(name);
-//    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void setAllParametersBasedOnChosenCoin(int index){
 
+        System.out.println(data.getListOfCoins().get(index).getName());
+        String img = data.getListOfCoins().get(index).getImageFileSourcePath();
+        String name = data.getListOfCoins().get(index).getName();
+        String price = String.valueOf(data.getListOfCoins().get(index).getCurrentPrice());
+        String high24h = "$"+ data.getListOfCoins().get(index).getHigh24h();
+        String low24h = "$"+ data.getListOfCoins().get(index).getLow24h();
+
+        coinImage.setImage(new Image(img));
+        coinNameLabel.setText(name);
+        priceLabel.setText(price);
+        dayHighLabel.setText(high24h);
+        dayLowLabel.setText(low24h);
+        System.out.println(calculatePriceProgress());
+        dayHighLowProgressBar.setProgress(calculatePriceProgress());
 
 
     }
+
+    public double calculatePriceProgress(){
+        double high = data.getListOfCoins().get(StartScreenController.index).getHigh24h();
+        double low = data.getListOfCoins().get(StartScreenController.index).getLow24h();
+        double range = high-low;
+        double average = (high+low)/2.0;
+        return (range/average);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        setAllParametersBasedOnChosenCoin(StartScreenController.index);
+
+    }
+
+
 
 
 }
