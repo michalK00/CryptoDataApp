@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoinViewController">
+   <children>
+      <AnchorPane layoutX="-2.0" prefHeight="103.0" prefWidth="1006.0" style="-fx-background-color: #435C61;">
+         <children>
+            <JFXButton fx:id="goBackButton" layoutX="28.0" layoutY="28.0" onAction="#goBackButtonClicked" prefHeight="49.0" prefWidth="94.0" style="-fx-text-fill: #F2E9D5;" text="Back">
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/goBackIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Label fx:id="coinNameLabel" layoutX="269.0" layoutY="36.0" prefHeight="35.0" prefWidth="94.0" />
+            <ImageView fx:id="coinImage" fitHeight="62.0" fitWidth="66.0" layoutX="137.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

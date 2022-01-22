@@ -2,10 +2,14 @@ package controllers;
 
 import cryptodataapp.Coin;
 import cryptodataapp.CoinData;
+import cryptodataapp.CryptoApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import com.jfoenix.controls.*;
@@ -16,15 +20,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import org.controlsfx.control.PropertySheet;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.nio.channels.UnresolvedAddressException;
 import java.util.ResourceBundle;
 
 public class StartScreenController implements Initializable{
@@ -58,7 +61,7 @@ public class StartScreenController implements Initializable{
 
     );
 
-    public StartScreenController() throws UnknownHostException {
+    public StartScreenController()  {
     }
 
     @FXML
@@ -89,6 +92,20 @@ public class StartScreenController implements Initializable{
                     System.out.println();
 
                     System.out.println(rankColumn.getCellData(table.getSelectionModel().getSelectedItem()));
+                    try {
+                        Stage stage = new Stage();
+                        FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("Coin-view.fxml"));
+                        Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+                        stage.setTitle("Crypto Data Application");
+                        stage.setScene(scene);
+                        stage.setResizable(false);
+                        stage.show();
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 //w momencie klikniecia na nazwe tabeli pokazuje się null;
             }
@@ -143,7 +160,7 @@ public class StartScreenController implements Initializable{
 
     }
     public void rowHoveringFunction(){
-        https://stackoverflow.com/questions/26269940/how-do-i-make-something-happen-on-hover-of-a-row-in-a-javafx-tableview
+        //https://stackoverflow.com/questions/26269940/how-do-i-make-something-happen-on-hover-of-a-row-in-a-javafx-tableview
         table.setRowFactory(tableView -> {
             final TableRow<Coin> row = new TableRow<>();
             row.hoverProperty().addListener((observable) -> {
@@ -164,8 +181,8 @@ public class StartScreenController implements Initializable{
 
         ObservableList<Coin> coinList = FXCollections.observableArrayList();
 
-        if(!data.getListOfCoins().isEmpty()){
-            coinList.addAll(data.getListOfCoins());
+        if(!data.getListOfCoinsAndUpdate().isEmpty()){
+            coinList.addAll(data.getListOfCoinsAndUpdate());
             rankColumn.setCellValueFactory(new PropertyValueFactory<Coin,Integer>("rank"));
             nameColumn.setCellValueFactory(new PropertyValueFactory<Coin,String>("name"));
             priceColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("currentPrice"));

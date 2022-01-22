@@ -3,22 +3,18 @@ package cryptodataapp;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.channels.UnresolvedAddressException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class CoinData {
 
-    private static HttpURLConnection connection;
     private static ArrayList<Coin> listOfCoins = new ArrayList<Coin>();
 
-    public CoinData() throws UnknownHostException {
+    public CoinData() {
         connectAndLoadData();
     }
 
@@ -66,7 +62,11 @@ public class CoinData {
 
     }
 
-    public ArrayList<Coin> getListOfCoins() throws UnresolvedAddressException {
+    public ArrayList<Coin> getListOfCoinsAndUpdate() {
+        connectAndLoadData();
+        return listOfCoins;
+    }
+    public ArrayList<Coin> getListOfCoins() {
         return listOfCoins;
     }
 
