@@ -1,10 +1,7 @@
 package controllers;
 
-import cryptodataapp.Coin;
 import cryptodataapp.CoinData;
 import cryptodataapp.CryptoApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,22 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import com.jfoenix.controls.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CoinViewController implements  Initializable{
+public class CoinScreenController implements  Initializable{
 
     CoinData data = new CoinData();
 
@@ -54,7 +45,7 @@ public class CoinViewController implements  Initializable{
     private Label dayLowLabel;
 
 
-    public CoinViewController() {
+    public CoinScreenController() {
     }
 
     @FXML

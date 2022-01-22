@@ -93,7 +93,7 @@ public class StartScreenController implements Initializable{
                     index = rankColumn.getCellData(table.getSelectionModel().getSelectedItem())-1;
                     try {
                         Stage stage = new Stage();
-                        FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("Coin-view.fxml"));
+                        FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("CoinScreen-view.fxml"));
                         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
                         stage.setTitle("Crypto Data Application");
                         stage.setScene(scene);
