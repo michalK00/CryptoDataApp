@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import com.jfoenix.controls.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +25,22 @@ public class CoinScreenController implements  Initializable{
 
 
     @FXML
-    private Label priceLabel;
+    private Label athDateLabel;
+
+    @FXML
+    private Label athLabel;
+
+    @FXML
+    private Label athPercentageLabel;
+
+    @FXML
+    private Label atlDateLabel;
+
+    @FXML
+    private Label atlLabel;
+
+    @FXML
+    private Label atlPercentageLabel;
 
     @FXML
     private ImageView coinImage;
@@ -33,7 +49,7 @@ public class CoinScreenController implements  Initializable{
     private Label coinNameLabel;
 
     @FXML
-    private JFXButton goBackButton;
+    private Label dayChangePercentLabel;
 
     @FXML
     private Label dayHighLabel;
@@ -43,6 +59,19 @@ public class CoinScreenController implements  Initializable{
 
     @FXML
     private Label dayLowLabel;
+
+    @FXML
+    private JFXButton goBackButton;
+
+    @FXML
+    private Label marketCapLabel;
+
+    @FXML
+    private Label priceLabel;
+
+    @FXML
+    private Label tradingVolumeLabel;
+
 
 
     public CoinScreenController() {
@@ -74,17 +103,56 @@ public class CoinScreenController implements  Initializable{
         System.out.println(data.getListOfCoins().get(index).getName());
         String img = data.getListOfCoins().get(index).getImageFileSourcePath();
         String name = data.getListOfCoins().get(index).getName();
-        String price = String.valueOf(data.getListOfCoins().get(index).getCurrentPrice());
-        String high24h = "$"+ data.getListOfCoins().get(index).getHigh24h();
-        String low24h = "$"+ data.getListOfCoins().get(index).getLow24h();
+        String price = "$"+data.getListOfCoins().get(index).getCurrentPrice();
+        String high24h = "$"+ Math.round(data.getListOfCoins().get(index).getHigh24h()*100.0)/100.0;
+        String low24h = "$"+ Math.round(data.getListOfCoins().get(index).getLow24h()*100.0)/100.0;
+        String change24h = Math.round(data.getListOfCoins().get(index).getPriceChange24hPercentage()*100.0)/100.0+"%";
+
+        String tradingVolume = "$"+String.format("%,d", data.getListOfCoins().get(index).getTradingVolume());
+        String marketCap = "$"+String.format("%,d", data.getListOfCoins().get(index).getMarketCap());
+
+        String athPrice = "$"+Math.round(data.getListOfCoins().get(index).getAth()*100.0)/100.0;
+        String[] partsAthDate = data.getListOfCoins().get(index).getAthDate().toString().split("T");
+        String athDate = partsAthDate[0];
+        String athPercentage = Math.round(data.getListOfCoins().get(index).getAthChangePercentage() * 100.0) / 100.0 +"%";
+
+        String atlPrice = "$"+Math.round(data.getListOfCoins().get(index).getAtl()*100.0)/100.0;
+        String[] partsAtlDate = data.getListOfCoins().get(index).getAtlDate().toString().split("T");
+        String atlDate = partsAtlDate[0];
+        String atlPercentage = Math.round(data.getListOfCoins().get(index).getAtlChangePercentage() * 100.0) / 100.0 +"%";
 
         coinImage.setImage(new Image(img));
         coinNameLabel.setText(name);
         priceLabel.setText(price);
         dayHighLabel.setText(high24h);
         dayLowLabel.setText(low24h);
-        System.out.println(calculatePriceProgress());
         dayHighLowProgressBar.setProgress(calculatePriceProgress());
+        dayChangePercentLabel.setText(change24h);
+        if(Math.round(data.getListOfCoins().get(index).getPriceChange24hPercentage()*100.0)/100.0>=0){
+            dayChangePercentLabel.setTextFill(Color.web("GREEN"));
+        } else{
+            dayChangePercentLabel.setTextFill(Color.web("RED"));
+        }
+        tradingVolumeLabel.setText(tradingVolume);
+        marketCapLabel.setText(marketCap);
+        athLabel.setText(athPrice);
+        athDateLabel.setText(athDate);
+        athPercentageLabel.setText(athPercentage);
+        if(Math.round(data.getListOfCoins().get(index).getAthChangePercentage()*100.0)/100.0>=0){
+            athPercentageLabel.setTextFill(Color.web("GREEN"));
+        } else{
+            athPercentageLabel.setTextFill(Color.web("RED"));
+        }
+        atlLabel.setText(atlPrice);
+        atlDateLabel.setText(atlDate);
+        atlPercentageLabel.setText(atlPercentage);
+        if(Math.round(data.getListOfCoins().get(index).getAtlChangePercentage()*100.0)/100.0>=0){
+            atlPercentageLabel.setTextFill(Color.web("GREEN"));
+        } else{
+            atlPercentageLabel.setTextFill(Color.web("RED"));
+        }
+
+
 
 
     }

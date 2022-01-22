@@ -24,7 +24,8 @@ public class CryptoApplication extends Application {
     }
 
     public static void main(String[] args) {
-//        CoinData data = new CoinData();
+        CoinData data = new CoinData();
+        System.out.println(data.getListOfCoins().get(1).getAthDate());
 //        for(int x = 0; x<data.getListOfCoins().size();x++){
 //            System.out.println(data.getListOfCoins().get(x));
 //        }

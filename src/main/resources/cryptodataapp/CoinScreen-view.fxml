@@ -9,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoinScreenController">
@@ -37,7 +38,7 @@
                   <Font name="Calibri" size="28.0" />
                </font></Label>
             <ImageView fx:id="coinImage" fitHeight="62.0" fitWidth="66.0" layoutX="173.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="744.0" layoutY="41.0" text="Price: $" textFill="#d1c9b8">
+            <Label layoutX="744.0" layoutY="41.0" text="Price:" textFill="#d1c9b8">
                <font>
                   <Font name="Calibri" size="28.0" />
                </font>
@@ -51,7 +52,7 @@
       </AnchorPane>
       <AnchorPane layoutX="697.0" layoutY="103.0" prefHeight="597.0" prefWidth="307.0" style="-fx-background-color: #EDE8E0;">
          <children>
-            <AnchorPane layoutY="47.0" prefHeight="26.0" prefWidth="307.0">
+            <AnchorPane layoutY="40.0" prefHeight="26.0" prefWidth="307.0">
                <children>
                   <ProgressBar fx:id="dayHighLowProgressBar" layoutX="15.0" layoutY="4.0" prefHeight="11.0" prefWidth="277.0" progress="0.0" style="-fx-accent: #435C61;" />
                   <Label alignment="CENTER" layoutX="124.0" layoutY="14.0" text="24H Range" />
@@ -59,6 +60,81 @@
                   <Label fx:id="dayHighLabel" alignment="CENTER_RIGHT" layoutX="208.0" layoutY="13.0" prefHeight="17.0" prefWidth="85.0" />
                </children>
             </AnchorPane>
+            <Label layoutX="14.0" layoutY="98.0" prefHeight="25.0" prefWidth="116.0" text="24H change:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="209.0" prefHeight="23.0" prefWidth="85.0" text="Market cap:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Line endX="138.0" layoutX="131.0" layoutY="138.0" startX="-116.0" strokeWidth="0.4" />
+            <Label layoutX="13.0" layoutY="275.0" text="All-Time High:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="355.0" text="All-Time Low:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="154.0" prefHeight="25.0" prefWidth="124.0" text="Trading volume:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Line endX="138.0" layoutX="131.0" layoutY="194.0" startX="-116.0" strokeWidth="0.4" />
+            <Line endX="138.0" layoutX="131.0" layoutY="249.0" startX="-116.0" strokeWidth="0.4" />
+            <Line endX="138.0" layoutX="131.0" layoutY="325.0" startX="-116.0" strokeWidth="0.4" />
+            <Line endX="138.0" layoutX="131.0" layoutY="405.0" startX="-116.0" strokeWidth="0.4" />
+            <Label fx:id="dayChangePercentLabel" alignment="CENTER_RIGHT" layoutX="146.0" layoutY="98.0" prefHeight="25.0" prefWidth="124.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="tradingVolumeLabel" alignment="CENTER_RIGHT" layoutX="146.0" layoutY="154.0" prefHeight="25.0" prefWidth="124.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="marketCapLabel" alignment="CENTER_RIGHT" layoutX="146.0" layoutY="209.0" prefHeight="25.0" prefWidth="124.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="athLabel" alignment="CENTER_RIGHT" layoutX="146.0" layoutY="270.0" prefHeight="25.0" prefWidth="124.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="athDateLabel" layoutX="146.0" layoutY="295.0" prefHeight="15.0" prefWidth="59.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="athPercentageLabel" alignment="CENTER_RIGHT" layoutX="204.0" layoutY="295.0" prefHeight="15.0" prefWidth="66.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="atlLabel" alignment="CENTER_RIGHT" layoutX="146.0" layoutY="348.0" prefHeight="25.0" prefWidth="124.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="atlDateLabel" layoutX="146.0" layoutY="373.0" prefHeight="15.0" prefWidth="59.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="atlPercentageLabel" alignment="CENTER_RIGHT" layoutX="204.0" layoutY="373.0" prefHeight="15.0" prefWidth="66.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

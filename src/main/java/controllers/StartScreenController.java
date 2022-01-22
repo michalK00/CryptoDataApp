@@ -87,9 +87,7 @@ public class StartScreenController implements Initializable{
         table.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 if(event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() !=  null){
-                    System.out.println();
 
-                    System.out.println(rankColumn.getCellData(table.getSelectionModel().getSelectedItem()));
                     index = rankColumn.getCellData(table.getSelectionModel().getSelectedItem())-1;
                     try {
                         Stage stage = new Stage();

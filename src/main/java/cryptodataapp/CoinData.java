@@ -8,7 +8,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.channels.UnresolvedAddressException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CoinData {
 
@@ -32,14 +36,17 @@ public class CoinData {
     }
 
 
-
-
-
     }
     public static void parse(String responseBody){
 
         ArrayList<Coin> filledList = new ArrayList<>();
         JSONArray albums = new JSONArray(responseBody);
+        String athDateString;
+        String atlDateString;
+        Instant athDate;
+        Instant atlDate;
+        //SimpleDateFormat athDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sssZ");
+        //SimpleDateFormat atlDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sssZ");
 
         for(int i = 0; i<albums.length();i++){
             JSONObject album = albums.getJSONObject(i);
@@ -50,6 +57,7 @@ public class CoinData {
             String imageFileSourcePath =  album.getString("image");
             double currentPrice = album.getDouble("current_price");
             long marketCap = album.getLong("market_cap");
+            long tradingVolume = album.getLong("total_volume");
             double high24h = album.getFloat("high_24h");
             double low24h = album.getFloat("low_24h");
             double priceChange24h = Math.round(album.getFloat("price_change_24h")*100.0)/100.0;
@@ -57,8 +65,16 @@ public class CoinData {
             long circulatingSupply = album.getLong("circulating_supply");
             float ath = album.getFloat("ath");
             float athChangePercentage = album.getFloat("ath_change_percentage");
+            athDateString = album.getString("ath_date");
+            float atl = album.getFloat("atl");
+            float atlChangePercentage = album.getFloat("atl_change_percentage");
+            atlDateString = album.getString("atl_date");
+
+            athDate = Instant.parse(athDateString);
+            atlDate = Instant.parse(atlDateString);
+
             //System.out.println(id+" "+ symbol +" "+ currentPrice + " " + name + " " +imageFileSourcePath + marketCap + " "+priceChange24h+" "+ priceChange24hPercentage+" " + circulatingSupply + " " + ath + " "+ athChangePercentage);
-            filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,high24h,low24h,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage));
+            filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,tradingVolume,high24h,low24h,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage, athDate,atl, atlChangePercentage,atlDate));
         }
         listOfCoins=filledList;
 
