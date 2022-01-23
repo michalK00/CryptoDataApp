@@ -1,11 +1,16 @@
 package cryptodataapp;
 
+import cryptodataapp.historicalData.CoinHistoricalData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import java.io.IOException;
-
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class CryptoApplication extends Application {
@@ -24,15 +29,6 @@ public class CryptoApplication extends Application {
     }
 
     public static void main(String[] args) {
-        CoinData data = new CoinData();
-        System.out.println(data.getListOfCoins().get(1).getAthDate());
-//        for(int x = 0; x<data.getListOfCoins().size();x++){
-//            System.out.println(data.getListOfCoins().get(x));
-//        }
         launch();
-
-
-
-
     }
 }

@@ -1,4 +1,4 @@
-package cryptodataapp;
+package cryptodataapp.currentData;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;

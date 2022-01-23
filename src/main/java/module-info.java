@@ -9,9 +9,12 @@ module com.example.cryptodataapp {
     requires java.net.http;
     requires org.json;
     requires com.jfoenix;
+    requires java.sql;
 
     opens cryptodataapp to javafx.fxml;
     exports cryptodataapp;
     exports controllers;
     opens controllers to javafx.fxml;
+    exports cryptodataapp.currentData;
+    opens cryptodataapp.currentData to javafx.fxml;
 }

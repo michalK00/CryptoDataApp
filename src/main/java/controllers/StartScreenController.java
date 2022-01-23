@@ -1,7 +1,7 @@
 package controllers;
 
-import cryptodataapp.Coin;
-import cryptodataapp.CoinData;
+import cryptodataapp.currentData.Coin;
+import cryptodataapp.currentData.CoinData;
 import cryptodataapp.CryptoApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +27,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 public class StartScreenController implements Initializable{
@@ -104,7 +103,6 @@ public class StartScreenController implements Initializable{
                         e.printStackTrace();
                     }
                 }
-                //w momencie klikniecia na nazwe tabeli pokazuje się null;
             }
         });
     }

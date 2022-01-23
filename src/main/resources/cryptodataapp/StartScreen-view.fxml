@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="100" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
    <children>
-      <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0">
+      <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0"  visible="false">
          <children>
             <JFXButton buttonType="RAISED" layoutX="670.0" layoutY="42.0" prefHeight="34.0" prefWidth="61.0" ripplerFill="#74a0a8" style="-fx-background-color: #435C61;" text="Search" textFill="#f2e9d5" />
             <TextField layoutX="514.0" layoutY="46.0" promptText="Search" />
@@ -82,7 +82,7 @@
             <Text fill="#f2e9d5" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by CoinGecko" textAlignment="RIGHT" wrappingWidth="236.853515625" />
          </children>
       </VBox>
-      <AnchorPane fx:id="portfolioDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="false">
+      <AnchorPane fx:id="portfolioDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="true">
          <children>
             <Text layoutX="292.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In Construction">
                <font>

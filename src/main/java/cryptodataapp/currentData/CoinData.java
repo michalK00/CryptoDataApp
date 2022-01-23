@@ -1,4 +1,4 @@
-package cryptodataapp;
+package cryptodataapp.currentData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -7,12 +7,8 @@ import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.channels.UnresolvedAddressException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class CoinData {
 
@@ -74,7 +70,9 @@ public class CoinData {
             atlDate = Instant.parse(atlDateString);
 
             //System.out.println(id+" "+ symbol +" "+ currentPrice + " " + name + " " +imageFileSourcePath + marketCap + " "+priceChange24h+" "+ priceChange24hPercentage+" " + circulatingSupply + " " + ath + " "+ athChangePercentage);
-            filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,tradingVolume,high24h,low24h,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage, athDate,atl, atlChangePercentage,atlDate));
+            filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,tradingVolume,
+                    high24h,low24h,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage,
+                    athDate,atl, atlChangePercentage,atlDate));
         }
         listOfCoins=filledList;
 
