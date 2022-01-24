@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +16,7 @@
 
 <AnchorPane maxHeight="100" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F2E9D5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartScreenController">
    <children>
-      <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0"  visible="false">
+      <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0">
          <children>
             <JFXButton buttonType="RAISED" layoutX="670.0" layoutY="42.0" prefHeight="34.0" prefWidth="61.0" ripplerFill="#74a0a8" style="-fx-background-color: #435C61;" text="Search" textFill="#f2e9d5" />
             <TextField layoutX="514.0" layoutY="46.0" promptText="Search" />
@@ -50,7 +53,7 @@
                   </Text>
                   <AnchorPane layoutX="22.0" layoutY="261.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <JFXButton fx:id="cryptoDashboardButton" buttonType="RAISED" layoutX="56.0" layoutY="30.0" onAction="#cryptoDashboardButtonClicked" prefHeight="47.0" prefWidth="139.0" style="-fx-background-color: #384D52;" text="Crypto Dashboard" textFill="#f2e9d5">
+                        <JFXButton fx:id="cryptoDashboardButton" buttonType="RAISED" layoutX="56.0" layoutY="30.0" onAction="#cryptoDashboardButtonClicked" prefHeight="47.0" prefWidth="139.0" ripplerFill="#2f4043" style="-fx-background-color: #384D52;" text="Crypto Dashboard" textFill="#f2e9d5">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -82,13 +85,43 @@
             <Text fill="#f2e9d5" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by CoinGecko" textAlignment="RIGHT" wrappingWidth="236.853515625" />
          </children>
       </VBox>
-      <AnchorPane fx:id="portfolioDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="true">
+      <AnchorPane fx:id="portfolioDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="false">
          <children>
-            <Text layoutX="292.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In Construction">
+            <PieChart fx:id="pieChart" layoutX="-3.0" layoutY="182.0" prefHeight="506.0" prefWidth="399.0" title="Value each Currency in USD" />
+            <Label layoutX="115.0" layoutY="63.0" text="Total Value of Coins:" textFill="#435c61">
                <font>
-                  <Font size="22.0" />
+                  <Font size="18.0" />
                </font>
-            </Text>
+            </Label>
+            <JFXButton fx:id="addButton" layoutX="706.0" layoutY="52.0" onAction="#addButtonClicked" prefHeight="29.0" prefWidth="23.0" ripplerFill="#2f4043" style="-fx-background-color: #F2E9D5;" text="">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../addIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Label fx:id="totalPortfolioValueLabel" alignment="CENTER" layoutX="115.0" layoutY="92.0" prefHeight="27.0" prefWidth="163.0" textFill="#435c61">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="walletCoinTableView" layoutX="395.0" layoutY="91.0" prefHeight="607.0" prefWidth="362.0">
+              <columns>
+                <TableColumn fx:id="walletNameColumn" prefWidth="119.0" text="Name" />
+                  <TableColumn fx:id="walletAmountColumn" prefWidth="90.0" text="Amount" />
+                  <TableColumn fx:id="walletTotalValueColumn" prefWidth="111.0" text="Total Value ($) " />
+                  <TableColumn fx:id="walletDeleteColumn" prefWidth="42.0" text="Delete" />
+              </columns>
+            </TableView>
+            <TextField fx:id="amountTextField" layoutX="593.0" layoutY="54.0" prefHeight="25.0" prefWidth="109.0" promptText="Amount i.e. 1.2" />
+            <JFXComboBox fx:id="currencyComboBox" focusColor="#435c61" layoutX="439.0" layoutY="54.0" prefHeight="25.0" prefWidth="139.0" promptText="Select Currency" style="-jfx-label-float: true;" />
+            <Label layoutX="608.0" layoutY="42.0" text="Minimal value of 1$" textFill="#435c61">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

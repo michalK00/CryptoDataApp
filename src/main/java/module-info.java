@@ -17,4 +17,6 @@ module com.example.cryptodataapp {
     opens controllers to javafx.fxml;
     exports cryptodataapp.currentData;
     opens cryptodataapp.currentData to javafx.fxml;
+    exports cryptodataapp.wallet;
+    opens cryptodataapp.wallet to javafx.base;
 }
