@@ -9,6 +9,7 @@ import cryptodataapp.wallet.WalletCoinsSerialize;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,8 +46,7 @@ public class StartScreenController implements Initializable{
     private JFXButton cryptoDashboardButton;
     @FXML
     private JFXButton portfolioButton;
-    @FXML
-    private JFXButton refreshButton;
+
     @FXML
     private AnchorPane cryptoDashboard;
     @FXML
@@ -65,6 +65,15 @@ public class StartScreenController implements Initializable{
     @FXML
     private TableColumn<Coin, Long> marketCapColumn;
 
+    @FXML
+    private TextField searchBox;
+
+    @FXML
+    void searchBoxAction(ActionEvent event) {
+
+    }
+
+
 
     @FXML
     protected void cryptoDashboardButtonClicked() {
@@ -75,7 +84,6 @@ public class StartScreenController implements Initializable{
     }
     @FXML
     protected void portfolioButtonClicked() {
-        initPortfolioWindow();
         cryptoDashboard.setVisible(false);
         portfolioDashboard.setVisible(true);
         portfolioButton.setButtonType(JFXButton.ButtonType.FLAT);
@@ -200,6 +208,7 @@ public class StartScreenController implements Initializable{
         }
 
 
+
     }
 
     @Override
@@ -209,7 +218,7 @@ public class StartScreenController implements Initializable{
 
         // Starting postion (that may change) for all components
         cryptoDashboardButton.setButtonType(JFXButton.ButtonType.FLAT);
-
+        initPortfolioWindow();
     }
 
     //===========================(Portfolio window)============================//
@@ -232,6 +241,8 @@ public class StartScreenController implements Initializable{
     @FXML
     private Label totalPortfolioValueLabel;
 
+    @FXML
+    private JFXButton saveButton;
 
     @FXML
     private TableColumn<WalletCoin, String> walletNameColumn;
@@ -246,7 +257,14 @@ public class StartScreenController implements Initializable{
     private TableColumn<WalletCoin, WalletCoin> walletDeleteColumn;
 
     ArrayList<WalletCoin> walletCoinsList = new ArrayList<>();
-    //WalletCoinsSerialize serializedWalletCoinsList = new WalletCoinsSerialize();
+    WalletCoinsSerialize serializedWalletCoinsList = new WalletCoinsSerialize();
+
+    @FXML
+    void saveButtonClicked(ActionEvent event) {
+        serializedWalletCoinsList.setWalletCoinArrayList(walletCoinsList);
+        serializedWalletCoinsList.save();
+
+    }
 
     @FXML
     void addButtonClicked(ActionEvent event) {
@@ -272,15 +290,19 @@ public class StartScreenController implements Initializable{
                 walletCoinsList.add(new WalletCoin(chosenCoin, Double.parseDouble(amount), price));
             }
             coinListTableViewInitAndUpdate();
-            //serializedWalletCoinsList.setWalletCoinArrayList(walletCoinsList);
+
+        }
+    }
+    public void loadObjectsFromSerializedFile(){
+        if(serializedWalletCoinsList.readAndGetWalletCoinArrayList()!=null){
+            walletCoinsList = serializedWalletCoinsList.getWalletCoinArrayList();
         }
     }
 
 
     public void initPortfolioWindow(){
-        //walletCoinsList= serializedWalletCoinsList.getWalletCoinArrayList();
+        loadObjectsFromSerializedFile();
         addComboBoxOptions();
-        pieChart.getData().clear();
         coinListTableViewInitAndUpdate();
     }
     public void addComboBoxOptions(){
@@ -290,11 +312,8 @@ public class StartScreenController implements Initializable{
     }
 
     public void setTotalPortfolioValueLabel(){
-        double totalValue = 0;
-        for(int x = 0; x<walletCoinsList.size();x++){
-            totalValue+=walletCoinsList.get(x).getCurrentValue();
-        }
-        totalPortfolioValueLabel.setText("$"+Math.round(totalValue*100.0)/100.0);
+        calculateTotalValue();
+        totalPortfolioValueLabel.setText("$"+Math.round(calculateTotalValue()*100.0)/100.0);
     }
     public void coinListTableViewInitAndUpdate(){
         ObservableList<WalletCoin> coinList = FXCollections.observableArrayList();
@@ -349,7 +368,6 @@ public class StartScreenController implements Initializable{
         setTotalPortfolioValueLabel();
         walletCoinTableView.setItems(coinList);
         walletCoinTableView.refresh();
-        //serializedWalletCoinsList.setWalletCoinArrayList(walletCoinsList);
     }
 
 
@@ -375,17 +393,35 @@ public class StartScreenController implements Initializable{
         pieChart.getData().clear();
         double percentValue;
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
-        double totalValue = 0;
+        double totalValue = calculateTotalValue();
         for(int x = 0; x<walletCoinsList.size();x++){
-            totalValue+=walletCoinsList.get(x).getCurrentValue();
+            for(int y = 0; y<data.getListOfCoins().size();y++){
+                if(data.getListOfCoins().get(y).getName().equals(walletCoinsList.get(x).getName())){
+                    double price = data.getListOfCoins().get(y).getCurrentPrice();
+                    percentValue = Math.round(price*walletCoinsList.get(x).getAmount()/totalValue*100);
+                    pieData.add(new PieChart.Data(walletCoinsList.get(x).getName(),percentValue));
+                }
+            }
         }
 
         for(int x = 0; x<walletCoinsList.size();x++){
-            percentValue = Math.round(walletCoinsList.get(x).getCurrentValue()/totalValue*100);
-            pieData.add(new PieChart.Data(walletCoinsList.get(x).getName(),percentValue));
+
         }
         pieChart.setData(pieData);
         pieChart.setAnimated(false);
+    }
+
+    public double calculateTotalValue() {
+        double totalValue = 0;
+        for(int x = 0; x<walletCoinsList.size();x++){
+            for(int y = 0; y<data.getListOfCoins().size();y++){
+                if(data.getListOfCoins().get(y).getName().equals(walletCoinsList.get(x).getName())){
+                    double price = data.getListOfCoins().get(y).getCurrentPrice();
+                    totalValue+=Math.round(price*walletCoinsList.get(x).getAmount()*100.0)/100.0;
+                }
+            }
+        }
+        return totalValue;
     }
 
 

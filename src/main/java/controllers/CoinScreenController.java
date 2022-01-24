@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -83,15 +82,6 @@ public class CoinScreenController implements  Initializable{
     private JFXToggleNode days360;
 
     @FXML
-    private JFXButton goBackButton;
-
-    @FXML
-    private JFXToggleNode linChart;
-
-    @FXML
-    private JFXToggleNode logChart;
-
-    @FXML
     private Label marketCapLabel;
 
     @FXML
@@ -103,9 +93,6 @@ public class CoinScreenController implements  Initializable{
 
     @FXML
     public LineChart<String, Double> lineChart;
-
-    @FXML
-    private CategoryAxis xAxis;
 
 
 
@@ -217,7 +204,6 @@ public class CoinScreenController implements  Initializable{
         }
             System.out.println("Error while drawing chart (range)");
         return 0;
-
     }
 
 
