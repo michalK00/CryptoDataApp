@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class StartScreenController implements Initializable{
@@ -170,6 +172,29 @@ public class StartScreenController implements Initializable{
         });
 
     }
+    public void searchBoxFilteringFuntion(ObservableList coinList){
+
+        FilteredList<Coin> filteredList = new FilteredList<>(coinList, b -> true);
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) ->{
+
+            filteredList.setPredicate(coin -> {
+                if(newValue==null||newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if(coin.getName().toLowerCase().contains(lowerCaseFilter)){
+                    return true;
+                } else
+                    return false;
+            });
+
+        });
+        SortedList<Coin> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedList);
+    }
     public void rowHoveringFunction(){
         //https://stackoverflow.com/questions/26269940/how-do-i-make-something-happen-on-hover-of-a-row-in-a-javafx-tableview
         table.setRowFactory(tableView -> {
@@ -203,6 +228,7 @@ public class StartScreenController implements Initializable{
             setCellTextColorDependingOnTheirValue();
             rowHoveringFunction();
             table.setItems(coinList);
+            searchBoxFilteringFuntion(coinList);
         } else{
             noInterentConnection();
         }
@@ -210,6 +236,7 @@ public class StartScreenController implements Initializable{
 
 
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

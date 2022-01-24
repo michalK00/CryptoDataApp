@@ -3,37 +3,66 @@ package cryptodataapp.wallet;
 import java.io.*;
 import java.util.ArrayList;
 
-public class WalletCoinsSerialize {
+public class WalletCoinsSerialize implements Serializable{
 
-    public static ArrayList<WalletCoin> walletCoinArrayList;
+    public static ArrayList<WalletCoin> arrayList;
+    private static final long serialVersionUID = 1234567L;
 
 
     public void save(){
-        try(ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream("listOfCoinsInWallet.ser"))){
+        if(!arrayList.isEmpty()){
+            try{
+                // Serialize data object to a file
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("listOfCoinsInWallet.ser"));
+                out.writeObject(arrayList);
+                out.close();
 
-            save.writeObject(walletCoinArrayList);
+                System.out.println("Serialized");
 
-        }catch (IOException e){
-            e.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
+
     }
-    public void read(){
-        try (ObjectInputStream read = new ObjectInputStream(new FileInputStream("listOfCoinsInWallet.ser"))){
+    public ArrayList<WalletCoin> read(){
+        ArrayList<WalletCoin> simpleArrayList = new ArrayList<>();
+        simpleArrayList = null;
+        try {
+            ObjectInputStream read = new ObjectInputStream(new FileInputStream("listOfCoinsInWallet.ser"));
 
-            walletCoinArrayList = (ArrayList<WalletCoin>) read.readObject();
+            simpleArrayList = (ArrayList<WalletCoin>) read.readObject();
 
-        }catch (IOException e){
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            read.close();
+            System.out.println("Deserialized");
+
+        }catch (EOFException eofe){
+
+        } catch (IOException ioe)
+        {
+            ioe.printStackTrace();
         }
+        catch (ClassNotFoundException c)
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+        }
+        return simpleArrayList;
+
     }
 
     public ArrayList<WalletCoin> getWalletCoinArrayList() {
-        return walletCoinArrayList;
+        return arrayList;
     }
 
     public void setWalletCoinArrayList(ArrayList<WalletCoin> walletCoinArrayList) {
-        WalletCoinsSerialize.walletCoinArrayList = walletCoinArrayList;
+        arrayList = walletCoinArrayList;
+    }
+    public ArrayList<WalletCoin> readAndGetWalletCoinArrayList(){
+        if(read()!=null){
+            arrayList = read();
+
+        }
+        return arrayList;
     }
 }
