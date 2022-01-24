@@ -60,12 +60,12 @@
       </AnchorPane>
       <AnchorPane layoutX="697.0" layoutY="103.0" prefHeight="597.0" prefWidth="307.0" style="-fx-background-color: #EDE8E0;">
          <children>
-            <AnchorPane layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="293.0">
+            <AnchorPane layoutX="8.0" layoutY="40.0" prefHeight="26.0" prefWidth="293.0">
                <children>
                   <ProgressBar fx:id="dayHighLowProgressBar" layoutX="8.0" layoutY="8.0" prefHeight="11.0" prefWidth="277.0" progress="0.0" style="-fx-accent: #435C61;" />
                   <Label alignment="CENTER" layoutX="117.0" layoutY="22.0" text="24H Range" />
-                  <Label fx:id="dayLowLabel" layoutX="14.0" layoutY="13.0" prefHeight="17.0" prefWidth="107.0" />
-                  <Label fx:id="dayHighLabel" alignment="CENTER_RIGHT" layoutX="208.0" layoutY="13.0" prefHeight="17.0" prefWidth="85.0" />
+                  <Label fx:id="dayLowLabel" layoutX="8.0" layoutY="17.0" prefHeight="17.0" prefWidth="107.0" />
+                  <Label fx:id="dayHighLabel" alignment="CENTER_RIGHT" layoutX="200.0" layoutY="17.0" prefHeight="17.0" prefWidth="85.0" />
                </children>
             </AnchorPane>
             <Label layoutX="14.0" layoutY="98.0" prefHeight="25.0" prefWidth="116.0" text="24H change:">
@@ -141,6 +141,28 @@
             <Label fx:id="atlPercentageLabel" alignment="CENTER_RIGHT" layoutX="204.0" layoutY="373.0" prefHeight="15.0" prefWidth="66.0">
                <font>
                   <Font size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="426.0" text="Prediction no.1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="16.0" layoutY="490.0" text="Prediction no.2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Line endX="138.0" layoutX="131.0" layoutY="470.0" startX="-116.0" strokeWidth="0.4" />
+            <Line endX="138.0" layoutX="131.0" layoutY="537.0" startX="-116.0" strokeWidth="0.4" />
+            <Label fx:id="prediction1Label" alignment="CENTER_RIGHT" layoutX="140.0" layoutY="426.0" prefHeight="25.0" prefWidth="124.0" text="">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="prediction2Label" alignment="CENTER_RIGHT" layoutX="140.0" layoutY="490.0" prefHeight="25.0" prefWidth="124.0" text="">
+               <font>
+                  <Font size="16.0" />
                </font>
             </Label>
          </children>

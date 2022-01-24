@@ -10,9 +10,9 @@ public class WalletCoinsSerialize implements Serializable{
 
 
     public void save(){
-        if(!arrayList.isEmpty()){
+
             try{
-                // Serialize data object to a file
+
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("listOfCoinsInWallet.ser"));
                 out.writeObject(arrayList);
                 out.close();
@@ -22,11 +22,10 @@ public class WalletCoinsSerialize implements Serializable{
             }catch (IOException e){
                 e.printStackTrace();
             }
-        }
 
     }
     public ArrayList<WalletCoin> read(){
-        ArrayList<WalletCoin> simpleArrayList = new ArrayList<>();
+        ArrayList<WalletCoin> simpleArrayList;
         simpleArrayList = null;
         try {
             ObjectInputStream read = new ObjectInputStream(new FileInputStream("listOfCoinsInWallet.ser"));

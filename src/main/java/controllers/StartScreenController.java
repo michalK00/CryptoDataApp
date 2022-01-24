@@ -95,6 +95,7 @@ public class StartScreenController implements Initializable{
     @FXML
     protected void refreshButtonClicked() {
         getAllCryptoListedOnTable();
+        coinListTableViewInitAndUpdate();
     }
 
     public static int index;
@@ -115,6 +116,9 @@ public class StartScreenController implements Initializable{
                         stage.setResizable(false);
                         stage.show();
                         ((Node)(event.getSource())).getScene().getWindow().hide();
+
+                        CoinScreenController controller = fxmlLoader.getController();
+                        controller.sendDataToModel(controller);
 
                     }
                     catch (IOException e) {

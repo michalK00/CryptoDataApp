@@ -3,6 +3,9 @@ package controllers;
 import cryptodataapp.currentData.CoinData;
 import cryptodataapp.CryptoApplication;
 import cryptodataapp.historicalData.CoinHistoricalData;
+import cryptodataapp.observable.Observable1;
+import cryptodataapp.observer.Observer1;
+import cryptodataapp.observer.Observer2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +27,7 @@ import java.util.ResourceBundle;
 
 public class CoinScreenController implements  Initializable{
 
-    CoinData data = new CoinData();
+    static CoinData data = new CoinData();
 
 
     @FXML
@@ -90,11 +93,16 @@ public class CoinScreenController implements  Initializable{
     @FXML
     private Label tradingVolumeLabel;
 
+    @FXML
+    public Label prediction1Label;
+
+    @FXML
+    public Label prediction2Label;
 
     @FXML
     public LineChart<String, Double> lineChart;
 
-
+    public static Observable1 obs;
 
     public CoinScreenController() {
     }
@@ -229,10 +237,36 @@ public class CoinScreenController implements  Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        Observable1 observable1 = new Observable1();
+        CoinScreenController.setObs(observable1);
+        Observer1 observer1 = new Observer1(observable1);
+        Observer2 observer2 = new Observer2(observable1);
+
         setAllParametersBasedOnChosenCoin(StartScreenController.index);
         drawChart();
 
     }
+    public static void setObs(Observable1 o){
+        obs=o;
+    }
+    public static void sendDataToModel(CoinScreenController controller){
+        obs.setData(data.getListOfCoins().get(StartScreenController.index), controller);
+    }
+    public void dataToView(String advise, String observer_info) {
+
+        if (observer_info.equals("Observer 1")) {
+
+            prediction1Label.setText(advise);
+        }
+        else if (observer_info.equals("Observer 2")) {
+
+            prediction2Label.setText(advise);
+        }
+
+    }
+
+
+
 
 
 
