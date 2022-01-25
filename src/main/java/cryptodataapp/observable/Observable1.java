@@ -31,6 +31,7 @@ public class Observable1 implements Subject {
     public void dataChanged(CoinScreenController controller){
         notifyObservers(controller);
     }
+
     public void setData(Coin coin, CoinScreenController controller){
         this.coin = coin;
         dataChanged(controller);

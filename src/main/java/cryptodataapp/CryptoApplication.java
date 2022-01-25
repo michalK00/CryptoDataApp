@@ -22,18 +22,25 @@ public class CryptoApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        loadScreenViewStage(stage);
+
+
+    }
+
+    public static void loadScreenViewStage(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("StartScreen-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
         stage.setTitle("Crypto Data Application");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
-
     }
 
     public static void main(String[] args) {
-
+        CoinHistoricalData data = new CoinHistoricalData(30, "bitcoin");
+        for(int x = 0; x<data.getHistoricalDataOfACoinOHLC().size();x++){
+            System.out.println(data.getHistoricalDataOfACoinOHLC().get(x));
+        }
         launch();
     }
 }

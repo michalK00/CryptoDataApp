@@ -1,0 +1,73 @@
+
+.candlestick-tooltip-label {
+    -fx-font-size: 0.75em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F4F4F4;
+    -fx-padding: 2 5 2 0;
+}
+
+.candlestick-candle {
+    -fx-background-color: #f03a26;
+}
+
+.candlestick-line {
+    -fx-stroke: #435C61;
+    -fx-stroke-width: 1px;
+}
+
+
+.candlestick-bar.close-above-open {
+    -fx-background-color: #55b510;
+    -fx-border-width: 1, 1,1,1;
+    -fx-border-color:  #435C61;
+}
+
+.candlestick-bar.open-above-close {
+    -fx-background-color: #f03a26;
+    -fx-border-width: 1, 1,1,1;
+    -fx-font-weight: bold;
+    -fx-border-color:   #435C61;
+}
+
+.label-gray {
+    -fx-background-color: rgb(25,25,25,0.70);
+}
+
+.axis {
+    -fx-text-fill: #435C61;
+    -fx-font-color: #435C61;
+    -fx-tick-label-fill: #435C61;
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 10;
+}
+
+.chart-title {
+    -fx-text-fill: #435C61;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+}
+
+.axis-label {
+    -fx-text-fill: black;
+    -fx-font-size: 0.53em;
+}
+
+.axis-tick-mark {
+    -fx-stroke: #435C61;
+    -fx-stroke-width: 1;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: #435C61;
+}
+
+.chart {
+    -fx-background-color: #F4F4F4;
+}
+.fx-background-color {
+    -fx-background-color: #f03a26;
+}
+.chart-plot-background {
+    -fx-background-color: #F4F4F4;
+}

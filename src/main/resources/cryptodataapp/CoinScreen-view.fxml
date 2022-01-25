@@ -18,18 +18,6 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoinScreenController">
    <children>
-      <LineChart fx:id="lineChart" layoutX="-7.0" layoutY="191.0" prefHeight="472.0" prefWidth="698.0" stylesheets="@css/chartStyle.css">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis label="Price(USD)" side="LEFT" />
-        </yAxis>
-         <styleClass>
-            <String fx:value="chart-series-line" />
-            <String fx:value="chart-line-symbol" />
-         </styleClass>
-      </LineChart>
       <AnchorPane layoutX="-2.0" prefHeight="103.0" prefWidth="1006.0" style="-fx-background-color: #435C61;">
          <children>
             <JFXButton fx:id="goBackButton" layoutX="28.0" layoutY="28.0" onAction="#goBackButtonClicked" prefHeight="49.0" prefWidth="94.0" style="-fx-text-fill: #F2E9D5;" text="Back">
@@ -60,7 +48,7 @@
       </AnchorPane>
       <AnchorPane layoutX="697.0" layoutY="103.0" prefHeight="597.0" prefWidth="307.0" style="-fx-background-color: #EDE8E0;">
          <children>
-            <AnchorPane layoutX="8.0" layoutY="40.0" prefHeight="26.0" prefWidth="293.0">
+            <AnchorPane layoutX="4.0" layoutY="40.0" prefHeight="26.0" prefWidth="293.0">
                <children>
                   <ProgressBar fx:id="dayHighLowProgressBar" layoutX="8.0" layoutY="8.0" prefHeight="11.0" prefWidth="277.0" progress="0.0" style="-fx-accent: #435C61;" />
                   <Label alignment="CENTER" layoutX="117.0" layoutY="22.0" text="24H Range" />
@@ -167,7 +155,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <JFXToggleNode fx:id="linChart" layoutX="463.0" layoutY="117.0" onAction="#chartTypeClicked" prefHeight="21.0" prefWidth="85.0" selected="true" text="Linear Chart">
+      <JFXToggleNode fx:id="linearChart" layoutX="463.0" layoutY="117.0" onAction="#chartTypeClicked" prefHeight="21.0" prefWidth="85.0" selected="true" text="Linear Chart">
          <unSelectedColor>
             <Color red="0.929411768913269" green="0.9098039269447327" blue="0.8784313797950745" />
          </unSelectedColor>
@@ -213,7 +201,7 @@
             <Color red="0.26274511218070984" green="0.3607843220233917" blue="0.3803921639919281" />
          </selectedColor>
       </JFXToggleNode>
-      <JFXToggleNode fx:id="days360" layoutX="626.0" layoutY="147.0" onAction="#chartRangeClicked" prefHeight="22.0" prefWidth="47.0" text="360d" toggleGroup="$chartRange">
+      <JFXToggleNode fx:id="days365" layoutX="626.0" layoutY="147.0" onAction="#chartRangeClicked" prefHeight="22.0" prefWidth="47.0" text="365d" toggleGroup="$chartRange">
          <unSelectedColor>
             <Color red="0.929411768913269" green="0.9098039269447327" blue="0.8784313797950745" />
          </unSelectedColor>
@@ -221,5 +209,22 @@
             <Color red="0.26274511218070984" green="0.3607843220233917" blue="0.3803921639919281" />
          </selectedColor>
       </JFXToggleNode>
+      <AnchorPane fx:id="lineChartAnchorPane" layoutX="42.0" layoutY="174.0" prefHeight="478.0" prefWidth="649.0">
+         <children>
+            <LineChart fx:id="chart" layoutX="-49.0" layoutY="14.0" prefHeight="472.0" prefWidth="698.0" stylesheets="@css/chartStyle.css">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" label="Price(USD)" side="LEFT" />
+              </yAxis>
+               <styleClass>
+                  <String fx:value="chart-series-line" />
+                  <String fx:value="chart-line-symbol" />
+               </styleClass>
+            </LineChart>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="candleChartAnchorPane" layoutX="48.0" layoutY="169.0" prefHeight="491.0" prefWidth="649.0" style="-fx-background-color: #F4F4F4;" visible="false" />
    </children>
 </AnchorPane>
