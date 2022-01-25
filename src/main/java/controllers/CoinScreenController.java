@@ -27,9 +27,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletionException;
 
 
 public class CoinScreenController implements  Initializable{
@@ -135,11 +138,15 @@ public class CoinScreenController implements  Initializable{
     //tutaj bedzie troche zabawy z konfiguracją i wyświetlaniem odpowiednich wykresów
     @FXML
     void chartRangeClicked(ActionEvent event) {
-        if(chartType.getSelectedToggle().equals(linearChart)){
-            drawChart();
-        } else if (chartType.getSelectedToggle().equals(candleChart)){
-            drawCandleChart(getActiveDaysToggleNode());
-        }else if(chartType.getSelectedToggle().equals(null)){
+        try {
+            if (chartType.getSelectedToggle().equals(linearChart)) {
+                drawChart();
+            } else if (chartType.getSelectedToggle().equals(candleChart)) {
+                drawCandleChart(getActiveDaysToggleNode());
+            }
+        }catch (NullPointerException npe){
+            lineChartAnchorPane.setVisible(false);
+            candleChartAnchorPane.setVisible(false);
         }
 
     }
@@ -148,11 +155,17 @@ public class CoinScreenController implements  Initializable{
 
     @FXML
     void chartTypeClicked(ActionEvent event) {
-        if(chartType.getSelectedToggle().equals(linearChart)){
-            drawChart();
-        } else if (chartType.getSelectedToggle().equals(candleChart)){
-            drawCandleChart(getActiveDaysToggleNode());
+        try{
+            if(chartType.getSelectedToggle().equals(linearChart)){
+                drawChart();
+            } else if (chartType.getSelectedToggle().equals(candleChart)){
+                drawCandleChart(getActiveDaysToggleNode());
+            }
+        }catch (NullPointerException e){
+        lineChartAnchorPane.setVisible(false);
+        candleChartAnchorPane.setVisible(false);
         }
+
     }
 
     @FXML
@@ -234,7 +247,7 @@ public class CoinScreenController implements  Initializable{
     }
     public int getActiveDaysToggleNode(){
         if(chartRange.getSelectedToggle()==null){
-            return 0;
+            return 30;
         } else if(chartRange.getSelectedToggle().equals(days30)){
             return 30;
         } else if(chartRange.getSelectedToggle().equals(days90)){
@@ -244,7 +257,7 @@ public class CoinScreenController implements  Initializable{
         } else if(chartRange.getSelectedToggle().equals(days365)){
             return 365;
         }
-            System.out.println("Error while drawing chart (range)");
+        System.out.println("Error while drawing chart (range)");
         return 0;
     }
 
@@ -272,6 +285,7 @@ public class CoinScreenController implements  Initializable{
     }
 
     private void drawCandleChart(int rangeOfDays) {
+
         lineChartAnchorPane.setVisible(false);
         candleChartAnchorPane.setVisible(true);
 
@@ -280,6 +294,7 @@ public class CoinScreenController implements  Initializable{
         double v2 =0;
         double a = 0;
         double candleWidth = 20;
+
         if(rangeOfDays==30){
             updatedRangeOfdays=30;
             v2=1;
@@ -301,8 +316,6 @@ public class CoinScreenController implements  Initializable{
             a=4;
             candleWidth = 6.5;
         }
-
-
         final NumberAxis xAxis = new NumberAxis(0,updatedRangeOfdays,v2);
         xAxis.setMinorTickCount(0);
         final NumberAxis yAxis = new NumberAxis();
@@ -314,19 +327,6 @@ public class CoinScreenController implements  Initializable{
         XYChart.Series<Number,Number> series = new XYChart.Series<Number,Number>();
         candleChart.setAnimated(false);
 
-
-        //wprowadzanie danych
-
-        for (int i=0; i< dataHistorical.getHistoricalDataOfACoinOHLC().size(); i++) {
-
-            //String date = dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDate();
-            double dayOpen =dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDayOpen();
-            double dayHigh =dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDayHigh();
-            double dayLow = dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDayLow();
-            double dayClose =dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDayClose();
-
-            series.getData().add(new XYChart.Data<Number,Number>(a*i,dayOpen, new CandleStickChart.CandleStickExtraValues(dayClose,dayHigh,dayLow)));
-        }
         ObservableList<XYChart.Series<Number,Number>> chartData = candleChart.getData();
         if (chartData == null) {
             chartData = FXCollections.observableArrayList(series);
@@ -334,14 +334,8 @@ public class CoinScreenController implements  Initializable{
         } else {
             candleChart.getData().add(series);
         }
-
-        StackPane root = new StackPane();
-        root.getChildren().add(candleChart);
-
-
-        series.getData().clear();
+        //wprowadzanie danych
         for (int i=0; i< dataHistorical.getHistoricalDataOfACoinOHLC().size(); i++) {
-
             //String date = dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDate();
             double dayOpen =dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDayOpen();
             double dayHigh =dataHistorical.getHistoricalDataOfACoinOHLC().get(i).getDayHigh();
@@ -357,8 +351,6 @@ public class CoinScreenController implements  Initializable{
         candleChart.setPrefHeight(472.0);
         yAxis.setForceZeroInRange(false);
         candleChartAnchorPane.setVisible(true);
-
-
     }
 
 
