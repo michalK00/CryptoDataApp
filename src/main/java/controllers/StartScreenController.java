@@ -3,7 +3,6 @@ package controllers;
 import cryptodataapp.currentData.Coin;
 import cryptodataapp.currentData.CoinData;
 import cryptodataapp.CryptoApplication;
-import cryptodataapp.historicalData.CoinHistoricalData;
 import cryptodataapp.wallet.WalletCoin;
 import cryptodataapp.wallet.WalletCoinsSerialize;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import com.jfoenix.controls.*;
@@ -30,15 +28,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class StartScreenController implements Initializable{
@@ -48,12 +43,10 @@ public class StartScreenController implements Initializable{
     private JFXButton cryptoDashboardButton;
     @FXML
     private JFXButton portfolioButton;
-
     @FXML
     private AnchorPane cryptoDashboard;
     @FXML
     private AnchorPane portfolioDashboard;
-
     @FXML
     private TableView<Coin> table;
     @FXML
@@ -66,15 +59,11 @@ public class StartScreenController implements Initializable{
     private TableColumn<Coin, Double> changeColumn;
     @FXML
     private TableColumn<Coin, Long> marketCapColumn;
-
     @FXML
     private TextField searchBox;
 
-    @FXML
-    void searchBoxAction(ActionEvent event) {
 
-    }
-
+    //===========================(Dashboard window)============================//
 
 
     @FXML
@@ -101,7 +90,7 @@ public class StartScreenController implements Initializable{
     public static int index;
     @FXML
     protected void tableClicked(){
-        //funkcja anonimowa
+
         table.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 if(event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() !=  null){
@@ -129,33 +118,7 @@ public class StartScreenController implements Initializable{
         });
     }
 
-
-    public void noInterentConnection(){
-
-        Label l = new Label("No internet connection");
-        l.setFont(new Font("Calibri", 26));
-        l.setTextFill(Color.web("#435C61"));
-
-        ClassLoader classLoader = getClass().getClassLoader();
-        Image image = null;
-        try {
-            File file = new File(classLoader.getResource("noWifi.png").getFile());
-            InputStream inputStream = new FileInputStream(file);
-            image = new Image(inputStream);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ImageView view = new ImageView(image);
-        view.setFitHeight(50);
-        view.setFitWidth(50);
-        view.setPreserveRatio(true);
-        l.setGraphic(view);
-
-        table.setPlaceholder(l);
-
-    }
-    public void setCellTextColorDependingOnTheirValue(){
-        //https://stackoverflow.com/questions/51988663/tableview-modify-style-per-cell-only
+    public void setCellTextColorDependingOnTheirValueFunction(){
 
         changeColumn.setCellFactory(col -> new TableCell<>() {
             @Override
@@ -167,16 +130,16 @@ public class StartScreenController implements Initializable{
                 } else {
                     setText(item.toString());
                     if (item < 0.0) {
-                        setTextFill(Color.RED); // or use setStyle(String)
+                        setTextFill(Color.RED);
                     } else {
-                        setTextFill(Color.GREEN); // or use setStyle(String)
+                        setTextFill(Color.GREEN);
                     }
                 }
             }
         });
 
     }
-    public void searchBoxFilteringFuntion(ObservableList coinList){
+    public void searchBoxFilteringFunction(ObservableList coinList){
 
         FilteredList<Coin> filteredList = new FilteredList<>(coinList, b -> true);
 
@@ -200,7 +163,6 @@ public class StartScreenController implements Initializable{
         table.setItems(sortedList);
     }
     public void rowHoveringFunction(){
-        //https://stackoverflow.com/questions/26269940/how-do-i-make-something-happen-on-hover-of-a-row-in-a-javafx-tableview
         table.setRowFactory(tableView -> {
             final TableRow<Coin> row = new TableRow<>();
             row.hoverProperty().addListener((observable) -> {
@@ -217,6 +179,31 @@ public class StartScreenController implements Initializable{
 
     }
 
+    public void noInterentConnection(){
+
+        Label l = new Label("No internet connection");
+        l.setFont(new Font("Calibri", 26));
+        l.setTextFill(Color.web("#435C61"));
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        Image image = null;
+        try {
+            File file = new File(classLoader.getResource("noWifiIcon.png").getFile());
+            InputStream inputStream = new FileInputStream(file);
+            image = new Image(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ImageView view = new ImageView(image);
+        view.setFitHeight(50);
+        view.setFitWidth(50);
+        view.setPreserveRatio(true);
+        l.setGraphic(view);
+
+        table.setPlaceholder(l);
+
+    }
+
     public void getAllCryptoListedOnTable(){
 
         ObservableList<Coin> coinList = FXCollections.observableArrayList();
@@ -229,18 +216,14 @@ public class StartScreenController implements Initializable{
             changeColumn.setCellValueFactory(new PropertyValueFactory<Coin,Double>("priceChange24hPercentage"));
             marketCapColumn.setCellValueFactory(new PropertyValueFactory<Coin,Long>("marketCap"));
 
-            setCellTextColorDependingOnTheirValue();
+            setCellTextColorDependingOnTheirValueFunction();
             rowHoveringFunction();
             table.setItems(coinList);
-            searchBoxFilteringFuntion(coinList);
+            searchBoxFilteringFunction(coinList);
         } else{
             noInterentConnection();
         }
-
-
-
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -253,9 +236,6 @@ public class StartScreenController implements Initializable{
     }
 
     //===========================(Portfolio window)============================//
-
-    @FXML
-    private JFXButton addButton;
 
     @FXML
     private TextField amountTextField;
@@ -273,9 +253,6 @@ public class StartScreenController implements Initializable{
     private Label totalPortfolioValueLabel;
 
     @FXML
-    private JFXButton saveButton;
-
-    @FXML
     private TableColumn<WalletCoin, String> walletNameColumn;
 
     @FXML
@@ -289,6 +266,8 @@ public class StartScreenController implements Initializable{
 
     ArrayList<WalletCoin> walletCoinsList = new ArrayList<>();
     WalletCoinsSerialize serializedWalletCoinsList = new WalletCoinsSerialize();
+
+
 
     @FXML
     void saveButtonClicked(ActionEvent event) {
@@ -318,23 +297,18 @@ public class StartScreenController implements Initializable{
                 }
             }
             if (doWeAdd){
-                walletCoinsList.add(new WalletCoin(chosenCoin, Double.parseDouble(amount), price));
+                walletCoinsList.add(new WalletCoin(chosenCoin, Double.parseDouble(amount)));
             }
             coinListTableViewInitAndUpdate();
 
         }
     }
+
+    //Initializing methods
     public void loadObjectsFromSerializedFile(){
         if(serializedWalletCoinsList.readAndGetWalletCoinArrayList()!=null){
             walletCoinsList = serializedWalletCoinsList.getWalletCoinArrayList();
         }
-    }
-
-
-    public void initPortfolioWindow(){
-        loadObjectsFromSerializedFile();
-        addComboBoxOptions();
-        coinListTableViewInitAndUpdate();
     }
     public void addComboBoxOptions(){
         for(int x = 0; x<data.getListOfCoins().size();x++){
@@ -342,10 +316,6 @@ public class StartScreenController implements Initializable{
         }
     }
 
-    public void setTotalPortfolioValueLabel(){
-        calculateTotalValue();
-        totalPortfolioValueLabel.setText("$"+Math.round(calculateTotalValue()*100.0)/100.0);
-    }
     public void coinListTableViewInitAndUpdate(){
         ObservableList<WalletCoin> coinList = FXCollections.observableArrayList();
 
@@ -400,24 +370,21 @@ public class StartScreenController implements Initializable{
         walletCoinTableView.setItems(coinList);
         walletCoinTableView.refresh();
     }
-
-
-    private Button createDeleteButton(){
-        Button button = new Button();
-        ClassLoader classLoader = getClass().getClassLoader();
-        Image image = null;
-        try {
-            File file = new File(classLoader.getResource("deleteIcon.png").getFile());
-            InputStream inputStream = new FileInputStream(file);
-            image = new Image(inputStream);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void setTotalPortfolioValueLabel(){
+        calculateTotalValue();
+        totalPortfolioValueLabel.setText("$"+Math.round(calculateTotalValue()*100.0)/100.0);
+    }
+    public double calculateTotalValue() {
+        double totalValue = 0;
+        for(int x = 0; x<walletCoinsList.size();x++){
+            for(int y = 0; y<data.getListOfCoins().size();y++){
+                if(data.getListOfCoins().get(y).getName().equals(walletCoinsList.get(x).getName())){
+                    double price = data.getListOfCoins().get(y).getCurrentPrice();
+                    totalValue+=Math.round(price*walletCoinsList.get(x).getAmount()*100.0)/100.0;
+                }
+            }
         }
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(20);
-        imageView.setFitWidth(20);
-        button.setGraphic(imageView);
-        return button;
+        return totalValue;
     }
 
     public void drawPieChart(){
@@ -442,17 +409,28 @@ public class StartScreenController implements Initializable{
         pieChart.setAnimated(false);
     }
 
-    public double calculateTotalValue() {
-        double totalValue = 0;
-        for(int x = 0; x<walletCoinsList.size();x++){
-            for(int y = 0; y<data.getListOfCoins().size();y++){
-                if(data.getListOfCoins().get(y).getName().equals(walletCoinsList.get(x).getName())){
-                    double price = data.getListOfCoins().get(y).getCurrentPrice();
-                    totalValue+=Math.round(price*walletCoinsList.get(x).getAmount()*100.0)/100.0;
-                }
-            }
+    private Button createDeleteButton(){
+        Button button = new Button();
+        ClassLoader classLoader = getClass().getClassLoader();
+        Image image = null;
+        try {
+            File file = new File(classLoader.getResource("deleteIcon.png").getFile());
+            InputStream inputStream = new FileInputStream(file);
+            image = new Image(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return totalValue;
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(20);
+        imageView.setFitWidth(20);
+        button.setGraphic(imageView);
+        return button;
+    }
+
+    public void initPortfolioWindow(){
+        loadObjectsFromSerializedFile();
+        addComboBoxOptions();
+        coinListTableViewInitAndUpdate();
     }
 
 

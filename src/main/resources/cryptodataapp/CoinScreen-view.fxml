@@ -34,14 +34,14 @@
                   <Font name="Calibri" size="28.0" />
                </font></Label>
             <ImageView fx:id="coinImage" fitHeight="62.0" fitWidth="66.0" layoutX="173.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="744.0" layoutY="41.0" text="Price:" textFill="#d1c9b8">
+            <Label layoutX="735.0" layoutY="41.0" prefHeight="32.0" prefWidth="73.0" text="Price:" textFill="#d1c9b8">
                <font>
-                  <Font name="Calibri" size="28.0" />
+                  <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="priceLabel" alignment="BOTTOM_LEFT" layoutX="829.0" layoutY="35.0" prefHeight="38.0" prefWidth="170.0" textFill="#d1c9b8">
+            <Label fx:id="priceLabel" alignment="BOTTOM_LEFT" layoutX="822.0" layoutY="42.0" prefHeight="38.0" prefWidth="170.0" textFill="#d1c9b8">
                <font>
-                  <Font name="Calibri" size="28.0" />
+                  <Font name="System Bold" size="28.0" />
                </font>
             </Label>
          </children>
@@ -143,14 +143,14 @@
             </Label>
             <Line endX="138.0" layoutX="131.0" layoutY="470.0" startX="-116.0" strokeWidth="0.4" />
             <Line endX="138.0" layoutX="131.0" layoutY="537.0" startX="-116.0" strokeWidth="0.4" />
-            <Label fx:id="prediction1Label" alignment="CENTER_RIGHT" layoutX="140.0" layoutY="426.0" prefHeight="25.0" prefWidth="124.0" text="">
+            <Label fx:id="prediction1Label" alignment="CENTER_RIGHT" layoutX="128.0" layoutY="426.0" prefHeight="25.0" prefWidth="143.0" text="">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="prediction2Label" alignment="CENTER_RIGHT" layoutX="140.0" layoutY="490.0" prefHeight="25.0" prefWidth="124.0" text="">
+            <Label fx:id="prediction2Label" alignment="CENTER_RIGHT" layoutX="128.0" layoutY="490.0" prefHeight="25.0" prefWidth="143.0" text="">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </Label>
          </children>

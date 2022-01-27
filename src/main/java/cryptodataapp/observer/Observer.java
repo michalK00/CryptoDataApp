@@ -4,5 +4,5 @@ import controllers.CoinScreenController;
 import cryptodataapp.currentData.Coin;
 
 public interface Observer {
-    public void update(Coin coin, CoinScreenController controller);
+    void update(Coin coin, CoinScreenController controller);
 }

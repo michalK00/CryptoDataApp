@@ -10,7 +10,7 @@ public class WalletCoin implements Serializable {
     @Serial
     private static final long serialVersionUID = 123456789L;
 
-    public WalletCoin(String name, double amount, double currentPrice) {
+    public WalletCoin(String name, double amount) {
         this.name = name;
         this.amount =  Math.round(amount*100.0)/100.0;
     }

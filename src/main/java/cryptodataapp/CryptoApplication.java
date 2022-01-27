@@ -21,19 +21,24 @@ public class CryptoApplication extends Application {
 
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         loadScreenViewStage(stage);
 
 
     }
 
-    public static void loadScreenViewStage(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("StartScreen-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
-        stage.setTitle("Crypto Data Application");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+    public static void loadScreenViewStage(Stage stage){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("StartScreen-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+            stage.setTitle("Crypto Data Application");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {

@@ -3,10 +3,9 @@ package cryptodataapp.wallet;
 import java.io.*;
 import java.util.ArrayList;
 
-public class WalletCoinsSerialize implements Serializable{
+public class WalletCoinsSerialize{
 
     public static ArrayList<WalletCoin> arrayList;
-    private static final long serialVersionUID = 1234567L;
 
 
     public void save(){
@@ -25,8 +24,10 @@ public class WalletCoinsSerialize implements Serializable{
 
     }
     public ArrayList<WalletCoin> read(){
+
         ArrayList<WalletCoin> simpleArrayList;
         simpleArrayList = null;
+
         try {
             ObjectInputStream read = new ObjectInputStream(new FileInputStream("listOfCoinsInWallet.ser"));
 
@@ -57,6 +58,7 @@ public class WalletCoinsSerialize implements Serializable{
     public void setWalletCoinArrayList(ArrayList<WalletCoin> walletCoinArrayList) {
         arrayList = walletCoinArrayList;
     }
+
     public ArrayList<WalletCoin> readAndGetWalletCoinArrayList(){
         if(read()!=null){
             arrayList = read();

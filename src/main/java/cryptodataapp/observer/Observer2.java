@@ -13,7 +13,6 @@ public class Observer2 extends CoinMarket implements Observer{
 
     private Coin coin;
     private Subject sub;
-    private Parent root;
 
     private final double someMysteriousValueCalculatedByScientists = -300;
 
@@ -28,16 +27,13 @@ public class Observer2 extends CoinMarket implements Observer{
     @Override
     public void update(Coin coin, CoinScreenController controller) {
 
-
             this.coin = coin;
             if(analize()<someMysteriousValueCalculatedByScientists){
                 controller.prediction2Label.setText("BUY");
             } else {
                 controller.prediction2Label.setText("DON'T BUY");;
             }
-            //System.out.println(analize());
-
-
+            System.out.println(analize());
     }
 
     public double analize(){

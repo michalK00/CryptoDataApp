@@ -2,7 +2,6 @@ package cryptodataapp.currentData;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,18 +19,16 @@ public class CoinData {
 
     public void connectAndLoadData(){
 
-    try{
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&sparkline=false&price_change_percentage=24h")).build();
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(CoinData::parse)
-                .join();
-    } catch (RuntimeException e){
-        e.printStackTrace();
-    }
-
-
+        try{
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&sparkline=false&price_change_percentage=24h")).build();
+            client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenApply(HttpResponse::body)
+                    .thenAccept(CoinData::parse)
+                    .join();
+        } catch (RuntimeException e){
+            e.printStackTrace();
+        }
     }
     public static void parse(String responseBody){
 
@@ -41,8 +38,6 @@ public class CoinData {
         String atlDateString;
         Instant athDate;
         Instant atlDate;
-        //SimpleDateFormat athDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sssZ");
-        //SimpleDateFormat atlDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sssZ");
 
         for(int i = 0; i<albums.length();i++){
             JSONObject album = albums.getJSONObject(i);
@@ -69,7 +64,6 @@ public class CoinData {
             athDate = Instant.parse(athDateString);
             atlDate = Instant.parse(atlDateString);
 
-            //System.out.println(id+" "+ symbol +" "+ currentPrice + " " + name + " " +imageFileSourcePath + marketCap + " "+priceChange24h+" "+ priceChange24hPercentage+" " + circulatingSupply + " " + ath + " "+ athChangePercentage);
             filledList.add(new Coin(rank, id,symbol,name,imageFileSourcePath,currentPrice,marketCap,tradingVolume,
                     high24h,low24h,priceChange24h,priceChange24hPercentage,circulatingSupply,ath,athChangePercentage,
                     athDate,atl, atlChangePercentage,atlDate));

@@ -15,9 +15,6 @@ public class Observer1 extends CoinMarket implements Observer{
 
     private Coin coin;
     private Subject sub;
-    private Parent root;
-
-
 
     private final double someMysteriousValueCalculatedByScientists = 0;
 
@@ -34,12 +31,18 @@ public class Observer1 extends CoinMarket implements Observer{
 
 
             this.coin = coin;
-            if(analize()>someMysteriousValueCalculatedByScientists){
-                controller.prediction1Label.setText("BUY");
+            if(analize()>75){
+                controller.prediction1Label.setText("Strong buy");
+            }else if(analize()>50){
+            controller.prediction1Label.setText("Buy");
+            }else if(analize()>29){
+                controller.prediction1Label.setText("Not good, not bad");
+            }else if(analize()>14){
+            controller.prediction1Label.setText("Don't buy");
             } else {
-                controller.prediction1Label.setText("DON'T BUY");;
+                controller.prediction1Label.setText("Strong don't buy");;
             }
-            //System.out.println(analize());
+            System.out.println(analize());
     }
 
     public double analize(){

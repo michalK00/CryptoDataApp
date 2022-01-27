@@ -66,39 +66,85 @@ public class CoinHistoricalData {
         historicalDataOfACoin=filledList;
 
     }
+    ArrayList<CoinHistorical> filledList = new ArrayList<>();
     public static void parseohlc(String responseBody){
-
         ArrayList<CoinHistorical> filledList = new ArrayList<>();
+
         JSONArray objArray = new JSONArray(responseBody);
-//        Candle's body:
-//
-//        1 - 2 days: 30 minutes
-//        3 - 30 days: 4 hours
-//        31 and before: 4 days
-//        something needs to be done with rangeInDays in that case (or maybe create a different class just for OHLC data)
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-
+        int interval=0;
         int secondRangeInDays = 0;
         if(rangeInDays==30){
-            secondRangeInDays = rangeInDays*6;
-        } else if (rangeInDays>30){
-            secondRangeInDays = rangeInDays/4;
+            for (int i = 0; i < 180;i++)
+            {
+                addDataToList(objArray, i, filledList);
+            }
+        } else if (rangeInDays==90){
+            for (int i = 0; i < 24;i++)
+            {
+                addDataToList(objArray, i, filledList);
+            }
+        } else if (rangeInDays==180){
+            for (int i = 0; i < 47;i++)
+            {
+                addDataToList(objArray, i, filledList);
+            }
+        } else if (rangeInDays==365){
+            for (int i = 0; i < 95;i++)
+            {
+                addDataToList(objArray, i, filledList);
+            }
         }
 
-        for (int i = 0; i < secondRangeInDays; i++)
-        {
-            long unixTimestamp = Long.parseLong(objArray.getJSONArray(i).get(0).toString());
-            double dayOpen = Double.parseDouble(objArray.getJSONArray(i).get(1).toString());
-            double dayHigh = Double.parseDouble(objArray.getJSONArray(i).get(2).toString());
-            double dayLow = Double.parseDouble(objArray.getJSONArray(i).get(3).toString());
-            double dayClose = Double.parseDouble(objArray.getJSONArray(i).get(4).toString());
-            date.setTime(unixTimestamp);
-
-            filledList.add(new CoinHistorical(dateFormat.format(date),dayOpen,dayHigh,dayLow,dayClose));
-        }
         historicalDataOfACoinOHLC = filledList;
+        merge4hCandlesDataIntoDayCandle();
+    }
+    public static void addDataToList(JSONArray objArray,int i, ArrayList<CoinHistorical> filledList){
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long unixTimestamp = Long.parseLong(objArray.getJSONArray(i).get(0).toString());
+        double dayOpen = Double.parseDouble(objArray.getJSONArray(i).get(1).toString());
+        double dayHigh = Double.parseDouble(objArray.getJSONArray(i).get(2).toString());
+        double dayLow = Double.parseDouble(objArray.getJSONArray(i).get(3).toString());
+        double dayClose = Double.parseDouble(objArray.getJSONArray(i).get(4).toString());
+        date.setTime(unixTimestamp);
+
+        filledList.add(new CoinHistorical(dateFormat.format(date),dayOpen,dayHigh,dayLow,dayClose));
+    }
+    public static void merge4hCandlesDataIntoDayCandle(){
+        ArrayList<CoinHistorical> mergedList = new ArrayList<>();
+        double dayOpen;
+        double dayHigh;
+        double dayLow;
+        double dayClose;
+        String date;
+
+        if(rangeInDays==30){
+            for(int i = 0; i<180;){
+                date = historicalDataOfACoinOHLC.get(i+5).getDate();
+                dayOpen = historicalDataOfACoinOHLC.get(i).getDayOpen();
+                dayClose = historicalDataOfACoinOHLC.get(i+5).getDayClose();
+
+                dayHigh= Math.max(Math.max(historicalDataOfACoinOHLC.get(i).getDayHigh(),
+                        historicalDataOfACoinOHLC.get(i+1).getDayHigh()),
+                        Math.max(historicalDataOfACoinOHLC.get(i+2).getDayHigh(),
+                                historicalDataOfACoinOHLC.get(i+3).getDayHigh()));
+                dayHigh = Math.max(dayHigh, Math.max(historicalDataOfACoinOHLC.get(i+4).getDayHigh(),historicalDataOfACoinOHLC.get(i+5).getDayHigh()));
+
+                dayLow= Math.min(Math.min(historicalDataOfACoinOHLC.get(i).getDayLow(),
+                        historicalDataOfACoinOHLC.get(i+1).getDayLow()),
+                        Math.min(historicalDataOfACoinOHLC.get(i+2).getDayLow(),
+                                historicalDataOfACoinOHLC.get(i+3).getDayLow()));
+                dayLow = Math.min(dayLow, Math.max(historicalDataOfACoinOHLC.get(i+4).getDayLow(),historicalDataOfACoinOHLC.get(i+5).getDayLow()));
+
+
+                i+=6;
+                mergedList.add(new CoinHistorical(date,dayOpen,dayHigh,dayLow,dayClose));
+            }
+            historicalDataOfACoinOHLC=mergedList;
+        }
     }
 
 

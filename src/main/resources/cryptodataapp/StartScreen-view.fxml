@@ -18,7 +18,7 @@
    <children>
       <AnchorPane id="dataView" fx:id="cryptoDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="true">
          <children>
-            <TextField fx:id="searchBox" layoutX="571.0" layoutY="49.0" onAction="#searchBoxAction" promptText="Search by name" />
+            <TextField fx:id="searchBox" layoutX="571.0" layoutY="49.0" promptText="Search by name" />
             <ImageView id="searchImg" fitHeight="25.0" fitWidth="23.0" layoutX="546.0" layoutY="49.0">
                <image>
                   <Image url="@img/searchIcon.png" />
@@ -87,9 +87,9 @@
       <AnchorPane fx:id="portfolioDashboard" layoutX="243.0" prefHeight="700.0" prefWidth="757.0" visible="false">
          <children>
             <PieChart fx:id="pieChart" layoutX="-3.0" layoutY="182.0" prefHeight="506.0" prefWidth="399.0" title="Value each Currency in USD" />
-            <Label layoutX="115.0" layoutY="63.0" text="Total Value of Coins:" textFill="#435c61">
+            <Label alignment="CENTER" layoutX="61.0" layoutY="70.0" prefHeight="47.0" prefWidth="272.0" text="Total Value of Coins:" textFill="#435c61">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <JFXButton fx:id="addButton" layoutX="657.0" layoutY="52.0" onAction="#addButtonClicked" prefHeight="29.0" prefWidth="23.0" ripplerFill="#2f4043" style="-fx-background-color: #F2E9D5;" text="">
@@ -101,9 +101,9 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <Label fx:id="totalPortfolioValueLabel" alignment="CENTER" layoutX="115.0" layoutY="92.0" prefHeight="27.0" prefWidth="163.0" textFill="#435c61">
+            <Label fx:id="totalPortfolioValueLabel" alignment="CENTER" layoutX="61.0" layoutY="107.0" prefHeight="47.0" prefWidth="272.0" textFill="#435c61">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <TableView fx:id="walletCoinTableView" layoutX="395.0" layoutY="92.0" prefHeight="607.0" prefWidth="362.0">
