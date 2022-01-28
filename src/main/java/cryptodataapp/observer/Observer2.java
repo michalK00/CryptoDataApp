@@ -29,11 +29,11 @@ public class Observer2 extends CoinMarket implements Observer{
 
             this.coin = coin;
             if(analize()<someMysteriousValueCalculatedByScientists){
-                controller.prediction2Label.setText("BUY");
+                controller.prediction2Label.setText("Buy");
             } else {
-                controller.prediction2Label.setText("DON'T BUY");;
+                controller.prediction2Label.setText("Don't buy");;
             }
-            System.out.println(analize());
+            //System.out.println(analize());
     }
 
     public double analize(){

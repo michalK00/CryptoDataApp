@@ -28,24 +28,6 @@ public class CandleStickChart<X, Y> extends XYChart<X, Y> {
         horizontalMarkers.addListener((InvalidationListener) observable -> layoutPlotChildren());
     }
 
-    public void addHorizontalValueMarker(Data<X, Y> marker) {
-        Objects.requireNonNull(marker, "the marker must not be null");
-        if (horizontalMarkers.contains(marker)) return;
-        Line line = new Line();
-        marker.setNode(line );
-        getPlotChildren().add(line);
-        horizontalMarkers.add(marker);
-    }
-
-    public void removeHorizontalValueMarker(Data<X, Y> marker) {
-        Objects.requireNonNull(marker, "the marker must not be null");
-        if (marker.getNode() != null) {
-            getPlotChildren().remove(marker.getNode());
-            marker.setNode(null);
-        }
-        horizontalMarkers.remove(marker);
-    }
-
     @Override
     protected void dataItemAdded(Series<X, Y> series, int itemIndex, Data<X, Y> item) {
         Node candle = createCandle(getData().indexOf(series), item, itemIndex);

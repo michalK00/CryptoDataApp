@@ -16,7 +16,12 @@ public class Observer1 extends CoinMarket implements Observer{
     private Coin coin;
     private Subject sub;
 
-    private final double someMysteriousValueCalculatedByScientists = 0;
+    int firstThreshold = 14;
+    int secondThreshold = 29;
+    int thirdThreshold = 50;
+    int fourthThreshold = 75;
+
+
 
     public Observer1(Subject sub){
         this.sub=sub;
@@ -31,18 +36,18 @@ public class Observer1 extends CoinMarket implements Observer{
 
 
             this.coin = coin;
-            if(analize()>75){
+            if(analize()>fourthThreshold){
                 controller.prediction1Label.setText("Strong buy");
-            }else if(analize()>50){
+            }else if(analize()>thirdThreshold){
             controller.prediction1Label.setText("Buy");
-            }else if(analize()>29){
+            }else if(analize()>secondThreshold){
                 controller.prediction1Label.setText("Not good, not bad");
-            }else if(analize()>14){
+            }else if(analize()>firstThreshold){
             controller.prediction1Label.setText("Don't buy");
             } else {
                 controller.prediction1Label.setText("Strong don't buy");;
             }
-            System.out.println(analize());
+            //System.out.println(analize());
     }
 
     public double analize(){

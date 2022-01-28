@@ -42,10 +42,10 @@ public class CryptoApplication extends Application {
     }
 
     public static void main(String[] args) {
-        CoinHistoricalData data = new CoinHistoricalData(30, "bitcoin");
-        for(int x = 0; x<data.getHistoricalDataOfACoinOHLC().size();x++){
-            System.out.println(data.getHistoricalDataOfACoinOHLC().get(x));
-        }
+//        CoinHistoricalData data = new CoinHistoricalData(30, "bitcoin");
+//        for(int x = 0; x<data.getHistoricalDataOfACoinOHLC().size();x++){
+//            System.out.println(data.getHistoricalDataOfACoinOHLC().get(x));
+//        }
         launch();
     }
 }

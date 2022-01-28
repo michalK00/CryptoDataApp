@@ -16,8 +16,6 @@ public class WalletCoinsSerialize{
                 out.writeObject(arrayList);
                 out.close();
 
-                System.out.println("Serialized");
-
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -34,7 +32,6 @@ public class WalletCoinsSerialize{
             simpleArrayList = (ArrayList<WalletCoin>) read.readObject();
 
             read.close();
-            System.out.println("Deserialized");
 
         }catch (EOFException eofe){
 

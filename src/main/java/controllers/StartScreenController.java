@@ -89,33 +89,31 @@ public class StartScreenController implements Initializable{
 
     public static int index;
     @FXML
-    protected void tableClicked(){
+    protected void tableClicked(MouseEvent event){
 
-        table.setOnMouseClicked((MouseEvent event) -> {
-            if(event.getButton().equals(MouseButton.PRIMARY)){
-                if(event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() !=  null){
+        if(event.getButton().equals(MouseButton.PRIMARY)){
+            if(event.getClickCount() == 2 && table.getSelectionModel().getSelectedItem() !=  null){
 
-                    index = rankColumn.getCellData(table.getSelectionModel().getSelectedItem())-1;
-                    try {
-                        Stage stage = new Stage();
-                        FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("CoinScreen-view.fxml"));
-                        Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
-                        stage.setTitle("Crypto Data Application");
-                        stage.setScene(scene);
-                        stage.setResizable(false);
-                        stage.show();
-                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                index = rankColumn.getCellData(table.getSelectionModel().getSelectedItem())-1;
+                try {
+                    Stage stage = new Stage();
+                    FXMLLoader fxmlLoader = new FXMLLoader(CryptoApplication.class.getResource("CoinScreen-view.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+                    stage.setTitle("Crypto Data Application");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
+                    ((Node)(event.getSource())).getScene().getWindow().hide();
 
-                        CoinScreenController controller = fxmlLoader.getController();
-                        controller.sendDataToModel(controller);
+                    CoinScreenController controller = fxmlLoader.getController();
+                    controller.sendDataToModel(controller);
 
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-        });
+        }
     }
 
     public void setCellTextColorDependingOnTheirValueFunction(){
@@ -126,7 +124,6 @@ public class StartScreenController implements Initializable{
                 super.updateItem(item,  empty);
                 if (empty || item == null) {
                     setText(null);
-                    setGraphic(null);
                 } else {
                     setText(item.toString());
                     if (item < 0.0) {
