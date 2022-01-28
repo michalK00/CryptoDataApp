@@ -13,3 +13,21 @@ public Observer1(Subject sub){
     coinPredicion = new "yourFileName"();
 }
 ```
+You have access to the following variables:
+```java
+coin.getCurrentPrice(); 
+coin.getMarketCap(); 
+coin.getHigh24h(); 
+coin.getLow24h();
+coin.getPriceChange24h();
+coin.getPriceChange24hPercentage();
+coin.getCirculatingSupply();
+coin.getAth();
+coin.getAthChangePercentage();
+coin.getAthDate();
+coin.getAtl();
+coin.getAtlChangePercentage();
+coin.getAtlDate();
+coin.getTradingVolume();
+```
+All of these variables are fields of Coin class located in currentData package
