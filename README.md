@@ -2,6 +2,11 @@
 
 This is an application for tracking cryptocurrency data and your own portfolio. It downloads its data from the CoinGecko api. The data is then processed, transformed into graphs and displayed in an interface made in JavaFx.
 
+View of the app:
+<p align="center"><img src="https://github.com/michalK00/CryptoDataApp/blob/master/Screenshots/CryptoDataApp1.jpg" width="500" /></p>
+<p align="center"><img src="https://github.com/michalK00/CryptoDataApp/blob/master/Screenshots/CryptoDataApp2.jpg" width="500" /></p>
+<p align="center"><img src="https://github.com/michalK00/CryptoDataApp/blob/master/Screenshots/CryptoDataApp3.jpg" width="500" /></p>
+
 It also allows you to add your own strategies for coin price prediction.
 
 You can add one simply by: adding new file to predictionStrategy package and implementing the interface inside this package called PredictionStrategyInterface.
