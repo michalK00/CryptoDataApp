@@ -1,6 +1,6 @@
 # CryptoDataApp
 
-This is an app for cryptocurrency data and wallet tracking. 
+This is an application for tracking cryptocurrency data and your own portfolio. It downloads its data from the CoinGecko api. The data is then processed, transformed into graphs and displayed in an interface made in JavaFx.
 
 It also allows you to add your own strategies for coin price prediction.
 
